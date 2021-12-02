@@ -8,10 +8,9 @@ namespace LocadoraLaumax.InterfacesGraficas
     {
         public static string usuarioLogado = string.Empty;
         public static string senhaLogado = string.Empty;
-        public static string nomeLogado = string.Empty;
         public static string docLogado = string.Empty;
         public static bool flogado = false;
-        Comandos bancoDados = new Comandos();
+        BDUsuarios bdUsuario = new BDUsuarios();
         public frmLogin()
         {
             InitializeComponent();
@@ -30,28 +29,23 @@ namespace LocadoraLaumax.InterfacesGraficas
         }
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            bool fsucesso = false;
             try
             {
                 if (!txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenha.Text.Trim().Equals(string.Empty))
                 {
-                    fsucesso = bancoDados.Login(new Usuarios(txtUsuario.Text.Trim(), txtSenha.Text.Trim()));
-                }
-                else
-                {
-                    MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                if (fsucesso)
-                {
-                    usuarioLogado = txtUsuario.Text.Trim();
-                    senhaLogado = txtSenha.Text.Trim();
-                    flogado = true;
-                    Dispose();
-                }
-                else
-                {
+                    Usuarios usuario = new Usuarios(txtUsuario.Text.Trim(), txtSenha.Text.Trim());
+                    docLogado = bdUsuario.RetornaDoc(usuario);
+                    if (bdUsuario.Login(usuario) && !docLogado.Equals(string.Empty))
+                    {
+                        usuarioLogado = usuario.Usuario;
+                        senhaLogado = usuario.Senha;
+                        flogado = true;
+                        Dispose();
+                        return;
+                    }
                     MessageBox.Show("Usuário ou senha incorreto", null, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
+                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception erro)
             {

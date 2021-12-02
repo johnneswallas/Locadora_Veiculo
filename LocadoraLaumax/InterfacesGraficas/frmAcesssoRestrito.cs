@@ -7,44 +7,40 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entidades;
 using BancoDados;
 namespace LocadoraLaumax.InterfacesGraficas
 {
     public partial class frmAcesssoRestrito : Form
     {
-        Comandos BancoDados = new Comandos();
-        public static bool faltenticado = false;
+        BDUsuarios bDUsuarios= new BDUsuarios();
         public static string docGerente = string.Empty;
+        
+        public static bool faltenticado = false;
         public frmAcesssoRestrito()
         {
             InitializeComponent();
         }
-        private void frmAcesssoRestrito_Load(object sender, EventArgs e)
-        {
-            faltenticado = false;
-        }
         private void btnSair_Click(object sender, EventArgs e)
         {
+            faltenticado = false;
             Dispose();
         }
         private void btnEntrar_Click(object sender, EventArgs e)
         {
+            
             if (!txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenha.Text.Trim().Equals(string.Empty))
             {
-                faltenticado = BancoDados.Autenticar(txtUsuario.Text.Trim(), txtSenha.Text.Trim());
-                if (faltenticado)
+                Usuarios usuario = new Usuarios(txtUsuario.Text.Trim(), txtSenha.Text.Trim());
+                docGerente = bDUsuarios.RetornaDoc(usuario);
+                if (bDUsuarios.Autenticar(usuario) && !docGerente.Equals(string.Empty))
                 {
+                    faltenticado = true;
                     Dispose();
-                }
-                else
-                {
-                    MessageBox.Show("Dados incorretos ", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
             }
-            else
-            {
-                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            MessageBox.Show("Erro ao tentar altenticar ", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
         private void Teclas_Enter(object sender, KeyEventArgs e)
         {

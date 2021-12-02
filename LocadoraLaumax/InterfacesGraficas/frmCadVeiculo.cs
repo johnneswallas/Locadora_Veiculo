@@ -45,9 +45,8 @@ namespace LocadoraLaumax.InterfacesGraficas
                 if (!txtPlaca.Text.Trim().Equals(string.Empty) && !txtFabricante.Text.Trim().Equals(string.Empty) && !txtModelo.Text.Trim().Equals(string.Empty)
                 && !Atalho.LimpaPreco(txtDiaria.Text).ToString().Equals(string.Empty) && !mkbKm.Text.Trim().Equals(string.Empty))
                 {
-                    Veiculos veiculo = new Veiculos(txtPlaca.Text.Trim().ToUpper(), txtFabricante.Text.Trim().ToUpper(), txtModelo.Text.Trim().ToUpper(), data,
-                    float.Parse(Atalho.LimpaPreco(txtDiaria.Text).ToString()),int.Parse(km), 'D', frmLogin.docLogado);
-                    fsucesso = bancoDado.CadastrarVeiculo(veiculo);
+                    fsucesso = bancoDado.CadastrarVeiculo(new Veiculos(txtPlaca.Text.Trim().ToUpper(), txtFabricante.Text.Trim().ToUpper(), txtModelo.Text.Trim().ToUpper(), data,
+                    float.Parse(Atalho.LimpaPreco(txtDiaria.Text).ToString()), int.Parse(km), 'D', frmLogin.docLogado));
                 }
                 else
                 {

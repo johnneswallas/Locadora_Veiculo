@@ -49,7 +49,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                 MessageBox.Show(" " + erro);
             }
             /*
-             * try
+             try
             {
                 List<int> listaEstoque = bancoDados.TotVeiculos();
                 for (int i = 0; i < 2; i++)
@@ -58,7 +58,8 @@ namespace LocadoraLaumax.InterfacesGraficas
                     lblIndisponivel.Text = "Veiculos Alocados: " + listaEstoque[1];
                 }
             }
-            catch (Exception erro){ }*/
+            catch (Exception erro){ }
+            //*/
         }
         private void btnPesquisar_Click(object sender, EventArgs e)
         {

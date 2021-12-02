@@ -36,7 +36,7 @@ namespace LocadoraLaumax
                             string dataBase = temp[1];
                             string uid = temp[2];
                             string pwd = temp[3];
-                            Comandos.servidor = $"Server = {ip}; Database = {dataBase}; Uid = {uid}; Pwd = {pwd};";
+                            BDComandos.stringConexao = $"Server = {ip}; Database = {dataBase}; Uid = {uid}; Pwd = {pwd};";
                             break;
                         }
                     }
@@ -61,7 +61,7 @@ namespace LocadoraLaumax
                     using (StreamWriter sw = File.AppendText(path))
                     {
                         sw.WriteLine($"{ip},{dataBase},{uid},{pwd}");
-                        Comandos.servidor = $"Server = {ip}; Database = {dataBase}; Uid = {uid}; Pwd = {pwd};";
+                        BDComandos.stringConexao = $"Server = {ip}; Database = {dataBase}; Uid = {uid}; Pwd = {pwd};";
                     }
                 }
             }

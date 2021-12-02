@@ -12,7 +12,8 @@ namespace BancoDados
     {
         public bool fBdAberto = false;
         MySqlConnection conexao = new MySqlConnection();
-        public static string servidor;
+
+        public static string servidor = "Server = localhost; Database = locadoralaumax; Uid = root; Pwd = 1234567;";
         public void Conectar()
         {
             try
@@ -44,47 +45,6 @@ namespace BancoDados
             {
                 MessageBox.Show("Erro no fechamento do banco de dados" + e);
             }
-        }
-        public bool Login(Usuarios usuarios)
-        {
-            bool fsucesso = false;
-            try
-            {
-                string bdUsuario = null;
-                string bdSenha = null;
-                Conectar();
-                MySqlCommand command = new MySqlCommand();
-                command.CommandText = ("select usuario, senha, nome, doc from usuario where usuario = ?;");
-                command.Connection = conexao;
-                command.Parameters.Clear();
-                command.Parameters.Add("@usuario", MySqlDbType.VarChar).Value = usuarios.Usuario;
-                MySqlDataReader reader = null;
-                reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        frmLogin.nomeLogado = reader["usuario"].ToString();
-                        frmLogin.docLogado = reader["doc"].ToString();
-                        bdUsuario = reader["usuario"].ToString();
-                        bdSenha = reader["senha"].ToString();
-                        if (reader["usuario"].ToString() == usuarios.Usuario && reader["senha"].ToString() == usuarios.Senha)
-                        {
-                            fsucesso = true;
-                            break;
-                        }
-                    }
-                }
-            }
-            catch (Exception erro)
-            {
-                MessageBox.Show("Erro executar login " + erro, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            finally
-            {
-                Desconectar();
-            }
-            return fsucesso;
         }
         public bool AlterarSenha(Usuarios usuario, string senhaNova)
         {
@@ -145,7 +105,8 @@ namespace BancoDados
             }
             return fsucesso;
         }
-        public bool Autenticar(string usuario, string senha)
+        //
+        /*public bool Autenticar(string usuario, string senha)
         {
             bool fautenticar = false;
             try
@@ -173,7 +134,7 @@ namespace BancoDados
             }
             catch (Exception erro)
             {
-                MessageBox.Show("Erro ao tentar autenticar usuário " + erro, "ERRO",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro ao tentar autenticar usuário " + erro, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
@@ -181,6 +142,7 @@ namespace BancoDados
             }
             return fautenticar;
         }
+        //
         public bool CadastrarUsuario(Usuarios usuario)
         {
             string bdDocumento = string.Empty;
@@ -247,7 +209,7 @@ namespace BancoDados
                 Desconectar();
             }
             return fsucesso;
-        }
+        }*/
         public bool CadastrarVeiculo(Veiculos veiculo)
         {
             bool fcadastrar = false;
@@ -504,99 +466,7 @@ namespace BancoDados
             }
             return lista;
         }
-        public bool AtualizarUsuario(Usuarios usuario)
-        {
-            string bdDocumento = string.Empty;
-            bool fsucesso = false;
-            bool fAltenticado = false;
-            try
-            {
-                Conectar();
-                MySqlCommand command = new MySqlCommand();
-                command.CommandText = ("select doc from usuario where doc = ?;");
-                command.Connection = conexao;
-                command.Parameters.Clear();
-                command.Parameters.Add("@doc", MySqlDbType.VarChar).Value = usuario.Documento;
-                MySqlDataReader reader = null;
-                reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        bdDocumento = reader["doc"].ToString();
-                        if (!bdDocumento.Equals(string.Empty))
-                        {
-                            fAltenticado = true;
-                            Desconectar();
-                            break;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Dados não encontrado", null, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            break;
-                        }
-                    }
-                }
-            }
-            catch (Exception erro)
-            {
-                MessageBox.Show("Dados não encontrado " + erro, null, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            try
-            {
-                Conectar();
-                MySqlCommand command = new MySqlCommand();
-                command.CommandText = ("select usuario from usuario where usuario = '" + usuario.Usuario + "'; ");
-                command.Connection = conexao;
-                MySqlDataReader reader = null;
-                reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        fAltenticado = false;
-                        MessageBox.Show("Nome de usuário indisponível", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        Desconectar();
-                        break;
-                    }
-                }
-            }
-            catch (Exception erro)
-            {
-                MessageBox.Show("Dados não encontrado " + erro, null, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            try
-            {
-                if (fAltenticado)
-                {
-                    Desconectar();
-                    Conectar();
-                    MySqlCommand command = new MySqlCommand();
-                    command.CommandText = ("update usuario set senha = ?, doc = ?, nome = ?, usuario = ?, cargo = ?, fkUsuarioGerente_doc = ?, fkUsuario_doc = ? where doc = '" + usuario.Documento + "';");
-                    command.Connection = conexao;
-                    command.Parameters.Clear();
-                    command.Parameters.Add("@senha", MySqlDbType.VarChar).Value = usuario.Senha;
-                    command.Parameters.Add("@doc", MySqlDbType.VarChar).Value = usuario.Documento;
-                    command.Parameters.Add("@nome", MySqlDbType.VarChar).Value = usuario.Nome;
-                    command.Parameters.Add("@usuario", MySqlDbType.VarChar).Value = usuario.Usuario;
-                    command.Parameters.Add("@cargo", MySqlDbType.VarChar).Value = usuario.Cargo;
-                    command.Parameters.Add("@fkUsuarioGerente_doc", MySqlDbType.VarChar).Value = frmAcesssoRestrito.docGerente;
-                    command.Parameters.Add("@fkUsuario_doc", MySqlDbType.VarChar).Value = frmLogin.docLogado;
-                    command.CommandType = CommandType.Text;
-                    command.ExecuteNonQuery();
-                    fsucesso = true;
-                }
-            }
-            catch (Exception erro)
-            {
-                MessageBox.Show("Erro ao Inserir usuário "+ erro, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            finally
-            {
-                Desconectar();
-            }
-            return fsucesso;
-        }
+        
         public bool AtualizarCliente(Clientes cliente)
         {
             string bdDocumento = string.Empty;
@@ -1050,22 +920,24 @@ namespace BancoDados
             }
             return lista;
         }
-        /*
+        ///*
         public List<int> TotVeiculos()
         {
             List<int> lista = new List<int>();
             try
             {
                 Conectar();
+
                 MySqlCommand command = new MySqlCommand("select situacao ,count(*) from veiculo group by situacao;", conexao);
                 MySqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    while (reader.Read())
-                    {
-                        lista.Add((int)command.ExecuteScalar());
-                        int teste = 1;
-                    }
+                    
+                    
+                        string n1 = reader.GetString(1);
+                        string n2 = reader.GetString(3);
+                        string teste = "teste";
+                    
                 }
             }
             catch (Exception erro)
@@ -1079,34 +951,7 @@ namespace BancoDados
             return lista;
         }
         //*/
-        public List<Usuarios> ConsultaUsuarios()
-        {
-            List<Usuarios> lista = new List<Usuarios>();
-            try
-            {
-                Conectar();
-                MySqlCommand command = new MySqlCommand("select * from usuario where usuario <> 'master';", conexao);
-                MySqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        lista.Add(new Usuarios(reader["doc"].ToString(), reader["nome"].ToString(), reader["usuario"].ToString(),
-                            reader["cargo"].ToString(), reader["fkUsuarioGerente_doc"].ToString(), reader["fkUsuario_doc"].ToString()));
-                    }
-                }
-
-            }
-            catch (Exception erro)
-            {
-                MessageBox.Show("Erro ao pesquisar dados " + erro, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            finally
-            {
-                Desconectar();
-            }
-            return lista;
-        }
+        
 
     }
 }

@@ -20,12 +20,11 @@ namespace LocadoraLaumax.InterfacesGraficas
 
         private void frmRelatorioUsuario_Load(object sender, EventArgs e)
         {
-            Comandos bancoDados = new Comandos();
             ltvUsuario.Items.Clear();
             try
             {
                 //pesquisar todos
-                List<Usuarios> lista = bancoDados.ConsultaUsuarios();
+                List<Usuarios> lista = new BDUsuarios().ConsultaUsuarios();
                 foreach (var obj in lista)
                 {
                     ListViewItem itens = new ListViewItem(new[] { obj.Documento, obj.Nome.ToUpper(), obj.Usuario,

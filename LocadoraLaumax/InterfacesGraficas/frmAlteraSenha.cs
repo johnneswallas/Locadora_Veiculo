@@ -6,7 +6,7 @@ namespace LocadoraLaumax.InterfacesGraficas
 {
     public partial class frmAlteraSenha : Form
     {
-        Comandos BancoDados = new Comandos();
+
         public frmAlteraSenha()
         {
             InitializeComponent();
@@ -17,15 +17,12 @@ namespace LocadoraLaumax.InterfacesGraficas
         }
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
-            bool fsucesso = false;
             try
             {
                 if (!txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenhaAtual.Text.Trim().Equals(string.Empty)
                     && !txtDoc.Text.Trim().Equals(string.Empty) && !txtSenhaNova.Text.Trim().Equals(string.Empty))
                 {
-                    string senhaN = txtSenhaNova.Text.Trim();
-                    fsucesso = BancoDados.AlterarSenha(new Usuarios(txtDoc.Text.Trim(), txtUsuario.Text.Trim(), txtSenhaAtual.Text.Trim(),frmLogin.docLogado), senhaN);
-                    if (fsucesso)
+                    if (new BDUsuarios().AlterarSenha((new Usuarios(txtDoc.Text.Trim(), txtUsuario.Text.Trim(), txtSenhaAtual.Text.Trim(), frmLogin.docLogado)), txtSenhaNova.Text.Trim()))
                     {
                         MessageBox.Show("Senha alterada com sucesso! ", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         frmLogin.senhaLogado = txtSenhaNova.Text.Trim();
@@ -41,6 +38,9 @@ namespace LocadoraLaumax.InterfacesGraficas
                     MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+            
+
+
             catch (Exception erro)
             {
                 MessageBox.Show("Erro inesperado" + erro, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);

@@ -14,7 +14,7 @@ namespace LocadoraLaumax.InterfacesGraficas
 {
     public partial class frmCadUsuario : Form
     {
-        Comandos BancoDados = new Comandos();
+        BDUsuarios BDUsuarios = new BDUsuarios();
         public frmCadUsuario()
         {
             InitializeComponent();
@@ -25,7 +25,6 @@ namespace LocadoraLaumax.InterfacesGraficas
         }
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            bool fsucesso = false;
             try
             {
                 string cargo = rdbVendedor.Text.Trim();
@@ -40,37 +39,31 @@ namespace LocadoraLaumax.InterfacesGraficas
                     {
                         frmAcesssoRestrito frmAcesssoRestrito = new frmAcesssoRestrito();
                         frmAcesssoRestrito.ShowDialog();
-                        if (frmAcesssoRestrito.faltenticado)
+                        if (frmAcesssoRestrito.faltenticado &&
+                            BDUsuarios.CadastrarUsuario(new Usuarios(doc, txtNome.Text.Trim(), txtUsuario.Text.Trim(), txtSenha.Text.Trim(), cargo, frmAcesssoRestrito.docGerente, frmLogin.docLogado)))
                         {
-                            fsucesso = BancoDados.CadastrarUsuario(new Usuarios(doc, txtNome.Text.Trim(), txtUsuario.Text.Trim(), txtSenha.Text.Trim(), cargo, frmAcesssoRestrito.docGerente, frmLogin.docLogado));
+                            MessageBox.Show("Usuário cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            Dispose();
+                            return;
                         }
                     }
-                    else
-                    {
-                        fsucesso = BancoDados.CadastrarUsuario(new Usuarios(doc, txtNome.Text.Trim(), txtUsuario.Text.Trim(), txtSenha.Text.Trim(), cargo, frmAcesssoRestrito.docGerente, frmLogin.docLogado));
-                    }
-                    if (fsucesso)
+                    if (BDUsuarios.CadastrarUsuario(new Usuarios(doc, txtNome.Text.Trim(), txtUsuario.Text.Trim(), txtSenha.Text.Trim(), cargo, frmAcesssoRestrito.docGerente, frmLogin.docLogado)))
                     {
                         MessageBox.Show("Usuário cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         Dispose();
                         return;
                     }
-                    else
-                    {
-                        MessageBox.Show("Erro a inserir Usuário! ", "erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
                 }
                 else
                 {
                     MessageBox.Show("Dados incompletos", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
                 }
             }
             catch (Exception)
             {
-                MessageBox.Show("Erro não indentificado", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Erro a inserir Usuário! ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        } 
+        }
         private void btnAtualisar_Click(object sender, EventArgs e)
         {
             try
@@ -87,23 +80,15 @@ namespace LocadoraLaumax.InterfacesGraficas
                     }
                     if (!doc.Equals(string.Empty) && !txtNome.Text.Trim().Equals(string.Empty) && !txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenha.Text.Trim().Equals(string.Empty))
                     {
-                        bool fsucesso = BancoDados.AtualizarUsuario(new Usuarios(doc, txtNome.Text.Trim(), txtUsuario.Text.Trim(), txtSenha.Text.Trim(), cargo, frmAcesssoRestrito.docGerente, frmLogin.docLogado));
-                        if (fsucesso)
+                        if (BDUsuarios.AtualizarUsuario(new Usuarios(doc, txtNome.Text.Trim(), txtUsuario.Text.Trim(), txtSenha.Text.Trim(), cargo, frmAcesssoRestrito.docGerente, frmLogin.docLogado)))
                         {
                             MessageBox.Show("Usuário atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             Dispose();
                             return;
                         }
-                        else
-                        {
-                            MessageBox.Show("Erro a atualizar usuário! ", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        MessageBox.Show("Erro a atualizar usuário! ", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-                    else
-                    {
-                        MessageBox.Show("Dados incompletos", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
+                    MessageBox.Show("Dados incompletos", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception)
@@ -120,7 +105,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                     btnCadastrar_Click(btnCadastrar, new EventArgs());
                     e.Handled = true;
                     e.SuppressKeyPress = true;
-					txtNome.Focus();
+                    txtNome.Focus();
                 }
                 else
                 {
