@@ -17,7 +17,7 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             InitializeComponent();
         }
-        Comandos BancoDados = new Comandos();
+        BDDevolucao BancoDados = new BDDevolucao();
         string foreingKey_Alugar;
         string placa;
         private void btnPesquisarCliente_Click(object sender, EventArgs e)
@@ -74,12 +74,13 @@ namespace LocadoraLaumax.InterfacesGraficas
             btnImprimir.Visible = false;
             DateTime dataNow = DateTime.Now;
             if (txtPlaca.Text.Equals(string.Empty) || txtPesquisarCliente.Text.Equals(string.Empty)
-                || Atalho.LimpaData(mskDevolucao.Text).Equals(string.Empty) || Atalho.LimpaKm(mskKm.Text).Equals(string.Empty))
+                || Atalho.LimpaData(mskDevolucao.Text).Equals(string.Empty))
             {
                 MessageBox.Show("Preencha todos os campos!", "Campo(s) em Branco(s)", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
                 return;
             }
             DialogResult result = MessageBox.Show("Data de devolução está correta ? ", "CONFIRMAÇÂO DE DATA", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
             try
             {
                 if (Atalho.LimpaData(mskDevolucao.Text).Length < 8 ||
@@ -166,6 +167,11 @@ namespace LocadoraLaumax.InterfacesGraficas
         }
         private void btnFinalizar_Click(object sender, EventArgs e)
         {
+            if (Atalho.LimpaKm(mskKm.Text).Equals(string.Empty))
+            {
+                MessageBox.Show("Preencha todos os campos!", "Campo(s) em Branco(s)", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+                return;
+            }
             btnCalcular_Click(btnCalcular, new EventArgs());
             DateTime dataAgora = DateTime.Now;
             string codDevolucao = Atalho.LimpaDataHora(dataAgora.ToString());

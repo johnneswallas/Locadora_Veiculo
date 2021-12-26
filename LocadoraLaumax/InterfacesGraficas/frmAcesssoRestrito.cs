@@ -13,9 +13,9 @@ namespace LocadoraLaumax.InterfacesGraficas
 {
     public partial class frmAcesssoRestrito : Form
     {
-        BDUsuarios bDUsuarios= new BDUsuarios();
+        BDUsuarios bDUsuarios = new BDUsuarios();
         public static string docGerente = string.Empty;
-        
+
         public static bool faltenticado = false;
         public frmAcesssoRestrito()
         {
@@ -28,8 +28,7 @@ namespace LocadoraLaumax.InterfacesGraficas
         }
         private void btnEntrar_Click(object sender, EventArgs e)
         {
-            
-            if (!txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenha.Text.Trim().Equals(string.Empty))
+            if (!new Atalho().CamposEmBranco(this))
             {
                 Usuarios usuario = new Usuarios(txtUsuario.Text.Trim(), txtSenha.Text.Trim());
                 docGerente = bDUsuarios.RetornaDoc(usuario);
@@ -39,14 +38,17 @@ namespace LocadoraLaumax.InterfacesGraficas
                     Dispose();
                     return;
                 }
+                MessageBox.Show("Erro ao tentar altenticar ", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
             }
-            MessageBox.Show("Erro ao tentar altenticar ", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
         }
         private void Teclas_Enter(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (!txtSenha.Text.Equals(string.Empty) && !txtUsuario.Equals(string.Empty))
+                if (!new Atalho().CamposEmBranco(this))
                 {
                     btnEntrar_Click(btnEntrar, new EventArgs());
                     e.Handled = true;
@@ -64,4 +66,5 @@ namespace LocadoraLaumax.InterfacesGraficas
             }
         }
     }
+
 }

@@ -8,7 +8,7 @@ namespace LocadoraLaumax.InterfacesGraficas
 {
     public partial class frmCadCliente : Form
     {
-        Comandos bancoDados = new Comandos();
+        BDClientes bancoDados = new BDClientes();
         public frmCadCliente()
         {
             InitializeComponent();

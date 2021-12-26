@@ -44,6 +44,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                         return;
                     }
                     MessageBox.Show("Usuário ou senha incorreto", null, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
                 MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

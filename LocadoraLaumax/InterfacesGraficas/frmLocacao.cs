@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entidades;
 using BancoDados;
@@ -18,11 +12,14 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             InitializeComponent();
         }
-        Comandos bancoDados = new Comandos();
+        BDAlugar bdAlugar = new BDAlugar();
+        BDClientes bdCliente = new BDClientes();
+        BDVeiculos bdVeiculos = new BDVeiculos();
+        
         private void btnPesquisarPlaca_Click(object sender, EventArgs e)
         {
             //pesquisa pela placa
-            List<Veiculos> lista = bancoDados.ConsultarPlacaVeiculo(txtPlaca.Text.Trim());
+            List<Veiculos> lista = bdVeiculos.DadosPorPlaca(txtPlaca.Text.Trim());
             try
             {
                 if (lista.Count != 0)
@@ -68,7 +65,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             //pesquisar pelo campo
             if (!txtPesquisarCliente.Text.Trim().Equals(string.Empty))
             {
-                List<Clientes> lista = bancoDados.ConsultarCampoClientes(txtPesquisarCliente.Text.Trim(), 0);
+                List<Clientes> lista = bdCliente.ConsultarCampoClientes(txtPesquisarCliente.Text.Trim(), 0);
                 if (lista.Count != 0)
                 {
                     try
@@ -141,7 +138,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                                 && !mkbTel.Text.Trim().Equals(string.Empty))
                             {
                                 Clientes cliente = new Clientes(doc, txtNome.Text.Trim(), mkbTel.Text.Trim(), data, estadoCivil, frmLogin.docLogado);
-                                fsucesso = bancoDados.CadastrarCliente(cliente);
+                                fsucesso = bdCliente.CadastrarCliente(cliente);
                             }
                             else
                             {
@@ -197,7 +194,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                                 && !mkbTel.Text.Trim().Equals(string.Empty))
                             {
                                 Clientes cliente = new Clientes(doc, txtNome.Text.Trim(), mkbTel.Text.Trim(), data, estadoCivil, frmLogin.docLogado);
-                                fsucesso = bancoDados.AtualizarCliente(cliente);
+                                fsucesso = bdCliente.AtualizarCliente(cliente);
                             }
                             else
                             {
@@ -327,7 +324,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                                 /*Random rnd = new Random();
                                 rnd.Next(100, 99999);*/
                                 string codAlugar = Atalho.LimpaDataHora(dataagora);
-                                if (bancoDados.RetiradaVeiculo(new Alugar(codAlugar, dataRetirada, dataDevolucao, Convert.ToDouble(diaria), doc, txtPlacaAluguel.Text, frmLogin.docLogado)))
+                                if (bdAlugar.RetiradaVeiculo(new Alugar(codAlugar, dataRetirada, dataDevolucao, Convert.ToDouble(diaria), doc, txtPlacaAluguel.Text, frmLogin.docLogado)))
                                 {
                                     MessageBox.Show("Registro feito com sucesso ", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     mskDevolucao.Clear();

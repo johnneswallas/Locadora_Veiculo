@@ -7,7 +7,7 @@ namespace LocadoraLaumax.InterfacesGraficas
 {
     public partial class frmConsultaVeiculo : Form
     {
-        Comandos bancoDado = new Comandos();
+        BDVeiculos bancoDado = new BDVeiculos();
         public frmConsultaVeiculo()
         {
             InitializeComponent();
@@ -15,7 +15,7 @@ namespace LocadoraLaumax.InterfacesGraficas
         internal void btnPesquisarPlaca_Click(object sender, EventArgs e)
         {
             //pesquisar por placa
-            List<Veiculos> lista = bancoDado.ConsultarPlacaVeiculo(txtPlaca.Text.Trim());
+            List<Veiculos> lista = bancoDado.DadosPorPlaca(txtPlaca.Text.Trim());
             try
             {
                 if (lista.Count != 0)
@@ -23,58 +23,52 @@ namespace LocadoraLaumax.InterfacesGraficas
                     foreach (var obj in lista)
                     {
                         lblFabricante.Text = obj.Fabricante.Trim().ToUpper().ToString();
+                        lblModelo.Text = obj.Modelo.ToUpper().ToString();
                         if (obj.Modelo.Contains(" "))
                         {
                             //corto a string apartir do 0 ate encontra o primeiro espaço
                             lblModelo.Text = obj.Modelo.ToUpper().ToString().Substring(0, obj.Modelo.IndexOf(" "));
                         }
-                        else
-                        {
-                            lblModelo.Text = obj.Modelo.ToUpper().ToString();
-                        }
                         lblDiaria.Text = obj.ValorDiaria.ToString("c");
                         lblAnoFabricacao.Text = obj.Ano.Year.ToString();
+                        lblSituacao.Text = "INDISPONÍVEL";
                         if (obj.Situacao == 'D' || obj.Situacao == 'd')
                         {
                             lblSituacao.Text = "DISPONÍVEL";
                         }
-                        else
-                        {
-                            lblSituacao.Text = "INDISPONÍVEL";
-                        }
                     }
+                    return;
                 }
-                else
-                {
-                    MessageBox.Show("Placa não encontrada", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                MessageBox.Show("Placa não encontrada", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception erro)
             {
-                MessageBox.Show("" + erro);
+                MessageBox.Show("ERRO" + erro);
             }
         }
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
             //pesquisar pelo campo
-            List<Veiculos> lista = bancoDado.ConsultarCampoVeiculo(txtPesquisar.Text);
+            List<Veiculos> lista = bancoDado.DadosPorCampoPesquisar(txtPesquisar.Text);
             try
             {
                 ltvVeiculo.Items.Clear();
-                foreach (var obj in lista)
+                if (lista.Count != 0)
                 {
-                    string situacao;
-                    if (obj.Situacao.ToString().ToUpper() == "D")
+                    foreach (var obj in lista)
                     {
-                        situacao = "DISPONÍVEL";
+                        string situacao = "INDISPONÍVEL";
+                        if (obj.Situacao.ToString().ToUpper() == "D")
+                        {
+                            situacao = "DISPONÍVEL";
+                        }
+                        ListViewItem itens = new ListViewItem(new[] { obj.Placa.ToUpper(), obj.Fabricante.ToUpper(), obj.Modelo.ToUpper(),
+                            obj.Ano.Year.ToString().ToUpper(), obj.ValorDiaria.ToString("c").ToUpper(), situacao });
+                        ltvVeiculo.Items.Add(itens);
                     }
-                    else
-                    {
-                        situacao = "INDISPONÍVEL";
-                    }
-                    ListViewItem itens = new ListViewItem(new[] { obj.Placa.ToUpper(), obj.Fabricante.ToUpper(), obj.Modelo.ToUpper(), obj.Ano.Year.ToString().ToUpper(), obj.ValorDiaria.ToString("c").ToUpper(), situacao });
-                    ltvVeiculo.Items.Add(itens);
+                    return;
                 }
+                MessageBox.Show("Dados não encontrados ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception erro)
             {
@@ -95,7 +89,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                 //copiado
                 this.SelectNextControl(this.ActiveControl, !e.Shift, true, true, true);
                 e.Handled = true;
-                e.SuppressKeyPress = true; 
+                e.SuppressKeyPress = true;
                 txtPlaca.Focus();
             }
         }

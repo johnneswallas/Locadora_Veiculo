@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Windows.Forms;
 namespace LocadoraLaumax.InterfacesGraficas
 {
@@ -16,7 +17,8 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             try
             {
-                if (!txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenha.Text.Trim().Equals(string.Empty))
+
+                if (!new Atalho().CamposEmBranco(this))
                 {
                     if (frmLogin.senhaLogado == txtSenha.Text.Trim() && frmLogin.usuarioLogado == txtUsuario.Text.Trim())
                     {
@@ -25,15 +27,11 @@ namespace LocadoraLaumax.InterfacesGraficas
                         Dispose();
                         return;
                     }
-                    else
-                    {
-                        MessageBox.Show("Usuário ou senha incoreto", null, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    MessageBox.Show("Usuário ou senha incoreto", null, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-                else
-                {
-                    MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             }
             catch (Exception erro)
             {
@@ -44,7 +42,7 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (!txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenha.Text.Trim().Equals(string.Empty))
+                if (!new Atalho().CamposEmBranco(this))
                 {
                     btnEntrar_Click(btnEntrar, new EventArgs());
                     e.Handled = true;

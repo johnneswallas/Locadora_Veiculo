@@ -15,6 +15,7 @@ namespace BancoDados
         {
             TabelaUsuario = "usuario";
         }
+
         public bool Login(Usuarios usuario)
         {
             try
@@ -44,7 +45,7 @@ namespace BancoDados
                 if (Consultar(TabelaUsuario, "usuario", usuario.Usuario) && Consultar(TabelaUsuario, "senha", usuario.Senha)
                     && Consultar(TabelaUsuario, "doc", usuario.Documento))
                 {
-                    Atualizar(TabelaUsuario, "senha", senhaNova, usuario.Documento);
+                    Atualizar(TabelaUsuario, "senha", senhaNova, "doc", usuario.Documento);
                     return true;
                 }
             }
@@ -114,13 +115,13 @@ namespace BancoDados
                     if (!Consultar(TabelaUsuario, "doc", usuario.Documento))
                     {   
                         //preciso melhor a forma de atualização 
-                        Atualizar(TabelaUsuario, "doc", usuario.Documento, usuario.Documento);
-                        Atualizar(TabelaUsuario, "nome", usuario.Nome, usuario.Documento);
-                        Atualizar(TabelaUsuario, "usuario", usuario.Usuario, usuario.Documento);
-                        Atualizar(TabelaUsuario, "senha", usuario.Senha, usuario.Documento);
-                        Atualizar(TabelaUsuario, "cargo", usuario.Cargo, usuario.Documento);
-                        Atualizar(TabelaUsuario, "kUsuarioGerente_doc", usuario.DocGerente, usuario.Documento);
-                        Atualizar(TabelaUsuario, "fkUsuario_doc", usuario.DocUsuarioLogado, usuario.Documento);
+                        Atualizar(TabelaUsuario, "doc", usuario.Documento, "doc", usuario.Documento);
+                        Atualizar(TabelaUsuario, "nome", usuario.Nome, "doc", usuario.Documento);
+                        Atualizar(TabelaUsuario, "usuario", usuario.Usuario, "doc", usuario.Documento);
+                        Atualizar(TabelaUsuario, "senha", usuario.Senha, "doc", usuario.Documento);
+                        Atualizar(TabelaUsuario, "cargo", usuario.Cargo, "doc", usuario.Documento);
+                        Atualizar(TabelaUsuario, "kUsuarioGerente_doc", usuario.DocGerente, "doc", usuario.Documento);
+                        Atualizar(TabelaUsuario, "fkUsuario_doc", usuario.DocUsuarioLogado, "doc", usuario.Documento);
                         return true;
                     }
                     MessageBox.Show("Nome de usuário indisponível", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -142,8 +143,7 @@ namespace BancoDados
         {
             try
             {
-                string colunas = "usuario, doc";
-                if (Consultar(TabelaUsuario, colunas, "usuario", "doc", usuario.Usuario, usuario.Documento))
+                if (Consultar(TabelaUsuario, "usuario",usuario.Usuario))
                 {
                     Conectar();
                     MySqlCommand command = new MySqlCommand("select doc from usuario where usuario = @usuario;", Conexao);
@@ -167,6 +167,7 @@ namespace BancoDados
             }
             return string.Empty;
         }
+
         public List<Usuarios> ConsultaUsuarios()
         {
             List<Usuarios> lista = new List<Usuarios>();

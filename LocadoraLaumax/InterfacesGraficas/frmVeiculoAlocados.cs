@@ -12,7 +12,7 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             InitializeComponent();
         }
-        Comandos bancoDados = new Comandos();
+        BDAlugar bancoDados = new BDAlugar();
         private void frmVeiculoAlocados_Load(object sender, EventArgs e)
         {
             try

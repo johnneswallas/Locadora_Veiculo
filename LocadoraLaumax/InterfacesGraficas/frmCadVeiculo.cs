@@ -6,7 +6,7 @@ namespace LocadoraLaumax.InterfacesGraficas
 {
     public partial class frmCadVeiculo : Form
     {
-        Comandos bancoDado = new Comandos();
+        BDVeiculos bancoDado = new BDVeiculos();
         public frmCadVeiculo()
         {
             InitializeComponent();
@@ -81,6 +81,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                     return;
                 }
                 string km = Atalho.LimpaKm(mkbKm.Text);
+                //olho se tem campo em branco crio metado para isso 
                 if (!txtPlaca.Text.Trim().Equals(string.Empty) && !txtFabricante.Text.Trim().Equals(string.Empty) && !txtModelo.Text.Trim().Equals(string.Empty)
                 && !Atalho.LimpaPreco(txtDiaria.Text).ToString().Equals(string.Empty) && !mkbKm.Text.Trim().Equals(string.Empty))
                 {

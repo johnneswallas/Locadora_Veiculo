@@ -53,10 +53,7 @@ namespace BancoDados
             try
             {
                 Conectar();
-                MySqlCommand command = new MySqlCommand("insert into "+tabela+" values(" + valores + ");", Conexao);
-                //command.Parameters.Clear();
-                //command.Parameters.AddWithValue("@tabela", tabela);
-                //command.Parameters.Add("@values", MySqlDbType.VarChar).Value = valores;
+                MySqlCommand command = new MySqlCommand("insert into " + tabela + " values(" + valores + ");", Conexao);
                 command.ExecuteNonQuery();
                 return true;
             }
@@ -70,13 +67,12 @@ namespace BancoDados
             }
             return false;
         }
-        protected bool Atualizar(string tabela, string coluna, string valor, string primaryKey)
+        protected bool Atualizar(string tabela, string coluna, string valor, string where, string primaryKey)
         {
             try
             {
                 Conectar();
-                MySqlCommand command = new MySqlCommand("update " + tabela + " set " + coluna
-                    + " = @valor where doc = @primaryKey;", Conexao);
+                MySqlCommand command = new MySqlCommand("update " + tabela + " set " + coluna + " = @valor where " + where + "= @primaryKey;", Conexao);
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("@valor", valor);
                 command.Parameters.AddWithValue("@primaryKey", primaryKey);
@@ -115,7 +111,7 @@ namespace BancoDados
             }
             return false;
         }
-        protected bool Consultar(string tabela, string coluna, string dadoComparar1)
+        protected bool Consultar(string tabela, string coluna, string dadoComparar)
         {
             try
             {
@@ -123,7 +119,7 @@ namespace BancoDados
                 MySqlCommand command = new MySqlCommand("select " + coluna + " from " + tabela + " where "
                     + coluna + "= @dadoComparar1;", Conexao);
                 command.Parameters.Clear();
-                command.Parameters.Add("@dadoComparar1", MySqlDbType.VarChar).Value = dadoComparar1;
+                command.Parameters.Add("@dadoComparar1", MySqlDbType.VarChar).Value = dadoComparar;
                 MySqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -141,13 +137,41 @@ namespace BancoDados
             }
             return false;
         }
+        protected bool Consultar(string tabela, string coluna, string dadoComparar, string primaryKey)
+        {
+            try
+            {
+                Conectar();
+                MySqlCommand command = new MySqlCommand("select " + coluna + " from " + tabela + " where "
+                    + coluna + "= @dadoComparar and placa = @primaryKey;", Conexao);
+                command.Parameters.Clear();
+                command.Parameters.Add("@dadoComparar", MySqlDbType.VarChar).Value = dadoComparar;
+                command.Parameters.Add("@@primaryKey", MySqlDbType.VarChar).Value = @primaryKey; 
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    return true;
+                }
+
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("Erro na consulta ao banco de dados " + erro, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            finally
+            {
+                Desconectar();
+            }
+            return false;
+        }
+        //posso colocar um vetor ao inves de pedir esse monte de parametros
         protected bool Consultar(string tabela, string colunas, string coluna1, string coluna2, string dadoComparar1, string dadoComparar2)
         {
             try
             {
                 Conectar();
                 MySqlCommand command = new MySqlCommand("select " + colunas + " from " + tabela + " where " + coluna1 +
-                    " = @dadoComparar1 or " + coluna2 + " = @dadoComparar2", Conexao);
+                    " = @dadoComparar1 and " + coluna2 + " = @dadoComparar2", Conexao);
                 command.Parameters.Clear();
                 command.Parameters.Add("@dadoComparar1", MySqlDbType.VarChar).Value = dadoComparar1;
                 command.Parameters.Add("@dadoComparar2", MySqlDbType.VarChar).Value = dadoComparar2;

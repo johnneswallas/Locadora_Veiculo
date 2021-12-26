@@ -13,7 +13,7 @@ namespace LocadoraLaumax.InterfacesGraficas
 {
     public partial class frmConsultarCliente : Form
     {
-        Comandos bancoDado = new Comandos();
+        BDClientes bancoDado = new BDClientes();
         public frmConsultarCliente()
         {
             InitializeComponent();

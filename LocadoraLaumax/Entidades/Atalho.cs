@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Entidades
 {
@@ -42,6 +43,26 @@ namespace Entidades
         {
             string result = km.Replace(".", "").Replace(",", "").Replace(" ", "");
             return result;
+        }
+        public bool CamposEmBranco(Control ctrl)
+        {
+            foreach (Control c in ctrl.Controls)
+            {
+                if (c is TextBox)
+                {
+                    if (((TextBox)c).Text.Length == 0)
+                    {
+                        //Campo ta em branco
+                        return true;
+                    }
+                }
+                else if (c.HasChildren)
+                {
+                    if (CamposEmBranco(c))
+                        return true;
+                }
+            }
+            return false;
         }
     }
 }

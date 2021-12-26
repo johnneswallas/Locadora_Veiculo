@@ -24,6 +24,7 @@ namespace Entidades
             ValorDiaria = valorDiaria;
             KmAtual = kmAtual;
             Situacao = situacao;
+            DocUsuario = docUsuario;
         }
         public Veiculos( string fabricante, string modelo, DateTime ano, float valorDiaria, char situacao)
         {
