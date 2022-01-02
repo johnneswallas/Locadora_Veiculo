@@ -31,7 +31,7 @@ namespace Entidades
         }
         public static double LimpaPreco(string preco)
         {
-            double result = Convert.ToDouble(preco.Replace("R", "").Replace("$", "").Replace(" ", ""));
+            double result = Convert.ToDouble(preco.Replace("R", "").Replace("r", "").Replace("$", "").Replace(" ", ""));
             return result;
         }
         public static string LimpaDoc(string doc)
@@ -44,13 +44,28 @@ namespace Entidades
             string result = km.Replace(".", "").Replace(",", "").Replace(" ", "");
             return result;
         }
+        private string LimpaTudo(string campo)
+        {
+            string limpa = campo.Replace(".", "").Replace(",", "").Replace(" ", "").Replace("-", "").Replace("R", "")
+                .Replace("r", "").Replace("$", "").Replace("/", "").Replace(":", "").Replace("(", "").Replace(")", "");
+            return limpa;
+        }
+
         public bool CamposEmBranco(Control ctrl)
         {
             foreach (Control c in ctrl.Controls)
             {
                 if (c is TextBox)
                 {
-                    if (((TextBox)c).Text.Length == 0)
+                    if (LimpaTudo(((TextBox)c).Text).Length == 0)
+                    {
+                        //Campo ta em branco
+                        return true;
+                    }
+                }
+                else if (c is MaskedTextBox)
+                {
+                    if (LimpaTudo(((MaskedTextBox)c).Text).Length == 0)
                     {
                         //Campo ta em branco
                         return true;
@@ -63,6 +78,7 @@ namespace Entidades
                 }
             }
             return false;
+
         }
     }
 }

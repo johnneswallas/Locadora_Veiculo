@@ -44,15 +44,11 @@ namespace LocadoraLaumax.InterfacesGraficas
                             btnCalcular.Visible = true;
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Cliente ou veículo incompativeis ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    MessageBox.Show("Cliente ou veículo incompativeis ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
                 }
-                else
-                {
-                    MessageBox.Show("Campos vazios", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                MessageBox.Show("Campos vazios", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
             }
             catch (Exception erro)
             {
@@ -65,71 +61,66 @@ namespace LocadoraLaumax.InterfacesGraficas
         }
         private void btnCalcular_Click(object sender, EventArgs e)
         {
-            string data = Atalho.LimpaData(mskDevolucao.Text);
-            btnPesquisarCliente_Click(btnPesquisarCliente, new EventArgs());
-            mskDevolucao.Text = data;
-            lblDias.Text = string.Empty;
-            btnImprimir.Visible = false;
-            btnFinalizar.Visible = false;
-            btnImprimir.Visible = false;
-            DateTime dataNow = DateTime.Now;
-            if (txtPlaca.Text.Equals(string.Empty) || txtPesquisarCliente.Text.Equals(string.Empty)
-                || Atalho.LimpaData(mskDevolucao.Text).Equals(string.Empty))
+            try
             {
-                MessageBox.Show("Preencha todos os campos!", "Campo(s) em Branco(s)", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
-                return;
-            }
-            DialogResult result = MessageBox.Show("Data de devolução está correta ? ", "CONFIRMAÇÂO DE DATA", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                btnPesquisarCliente_Click(btnPesquisarCliente, new EventArgs());
 
-            try
-            {
-                if (Atalho.LimpaData(mskDevolucao.Text).Length < 8 ||
-                    Convert.ToDateTime(mskDevolucao.Text) < Convert.ToDateTime(mskRetirada.Text))
+                mskDevolucao.Text = Atalho.LimpaData(mskDevolucao.Text);
+
+                lblDias.Text = string.Empty;
+                btnImprimir.Visible = false;
+                btnFinalizar.Visible = false;
+                btnImprimir.Visible = false;
+                DateTime dataNow = DateTime.Now;
+
+                if (txtPlaca.Text.Equals(string.Empty) || txtPesquisarCliente.Text.Equals(string.Empty)
+                    || Atalho.LimpaData(mskDevolucao.Text).Equals(string.Empty))
                 {
-                    throw new Exception();
+                    MessageBox.Show("Preencha todos os campos!", "Campo(s) em Branco(s)", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
+                    return;
                 }
-                TimeSpan quatDia = Convert.ToDateTime(mskDevolucao.Text) - Convert.ToDateTime(mskRetirada.Text);
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Data Incoreta", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            try
-            {
-                TimeSpan quatDia = Convert.ToDateTime(mskDevolucao.Text) - Convert.ToDateTime(mskRetirada.Text);
+
+                DialogResult result = MessageBox.Show("Data de devolução está correta ? ", "CONFIRMAÇÂO DE DATA", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.No)
                 {
                     mskDevolucao.Focus();
                     return;
                 }
+
+                if (Atalho.LimpaData(mskDevolucao.Text).Length < 8 ||
+                    Convert.ToDateTime(mskDevolucao.Text) < Convert.ToDateTime(mskRetirada.Text))
+                {
+                    MessageBox.Show("Data Incoreta", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                TimeSpan quatDia = Convert.ToDateTime(mskDevolucao.Text) - Convert.ToDateTime(mskRetirada.Text);
+
+                if (ckbJuros.Checked && Convert.ToDateTime(mskDevolucao.Text) < dataNow.Date)
+                {
+
+                    // se a data de devolução for menor q a data de hoje 
+                    // quando o cliente entrega depois da data combinada 
+                    // cobrar juros por dia 
+                    TimeSpan totDia = dataNow.Date - Convert.ToDateTime(mskRetirada.Text);
+                    lblDias.Text = Convert.ToInt32(totDia.TotalDays + 1).ToString();
+                    lblTotal.Text = (Convert.ToInt32(totDia.TotalDays + quatDia.TotalDays + 1) * Atalho.LimpaPreco(lblDiaria.Text)).ToString("C");
+                    return;
+                }
+
+                if (quatDia.TotalDays != 0)
+                {
+                    lblTotal.Text = (Convert.ToInt32(quatDia.TotalDays + 1) * Atalho.LimpaPreco(lblDiaria.Text)).ToString("C");
+                    lblDias.Text = Convert.ToInt32(quatDia.TotalDays + 1).ToString();
+                }
+                else if (quatDia.TotalDays == 0)
+                {
+                    lblTotal.Text = (Convert.ToInt32(quatDia.TotalDays + 1) * Atalho.LimpaPreco(lblDiaria.Text)).ToString("C");
+                    lblDias.Text = Convert.ToInt32(quatDia.TotalDays + 1).ToString();
+                }
+
                 //copiado 
                 string condicao = gpbCondicao.Controls.OfType<RadioButton>().SingleOrDefault(rad => rad.Checked == true).Text;
-                if (ckbJuros.Checked)
-                {
-                    if (Convert.ToDateTime(mskDevolucao.Text) < dataNow.Date)
-                    {   // se a data de devolução for menor q a data de hoje 
-                        // quando o cliente entrega depois da data combinada 
-                        // cobrar juros por dia 
-                        TimeSpan totDia = dataNow.Date - Convert.ToDateTime(mskRetirada.Text);
-                        lblDias.Text = Convert.ToInt32(totDia.TotalDays + 1).ToString();
-                        lblTotal.Text = (Convert.ToInt32(totDia.TotalDays + quatDia.TotalDays + 1) * Atalho.LimpaPreco(lblDiaria.Text)).ToString("C");
-
-                    }
-                }
-                else
-                {
-                    if (quatDia.TotalDays != 0)
-                    {
-                        lblTotal.Text = (Convert.ToInt32(quatDia.TotalDays + 1) * Atalho.LimpaPreco(lblDiaria.Text)).ToString("C");
-                        lblDias.Text = Convert.ToInt32(quatDia.TotalDays + 1).ToString();
-                    }
-                    else if (quatDia.TotalDays == 0)
-                    {
-                        lblTotal.Text = (Convert.ToInt32(quatDia.TotalDays + 1) * Atalho.LimpaPreco(lblDiaria.Text)).ToString("C");
-                        lblDias.Text = Convert.ToInt32(quatDia.TotalDays + 1).ToString();
-                    }
-                }
                 switch (condicao)
                 {
                     case "Sem Avaria":

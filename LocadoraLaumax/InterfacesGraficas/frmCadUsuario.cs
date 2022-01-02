@@ -23,6 +23,7 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             Dispose();
         }
+        
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
             try
@@ -32,32 +33,38 @@ namespace LocadoraLaumax.InterfacesGraficas
                 {
                     cargo = rdbGerente.Text.Trim();
                 }
-                string doc = Atalho.LimpaDoc(mkbDoc.Text);
-                if (!doc.Equals(string.Empty) && !txtNome.Text.Trim().Equals(string.Empty) && !txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenha.Text.Trim().Equals(string.Empty))
+                if (!new Atalho().CamposEmBranco(this))
                 {
-                    if (cargo == "Gerente")
+                    Usuarios usuario = new Usuarios(Atalho.LimpaDoc(mkbDoc.Text), txtNome.Text.Trim(), txtUsuario.Text.Trim(),
+                        txtSenha.Text.Trim(), cargo, frmAcesssoRestrito.docGerente, frmLogin.docLogado);
+
+                    switch (cargo)
                     {
-                        frmAcesssoRestrito frmAcesssoRestrito = new frmAcesssoRestrito();
-                        frmAcesssoRestrito.ShowDialog();
-                        if (frmAcesssoRestrito.faltenticado &&
-                            BDUsuarios.CadastrarUsuario(new Usuarios(doc, txtNome.Text.Trim(), txtUsuario.Text.Trim(), txtSenha.Text.Trim(), cargo, frmAcesssoRestrito.docGerente, frmLogin.docLogado)))
-                        {
-                            MessageBox.Show("Usuário cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Dispose();
-                            return;
-                        }
-                    }
-                    if (BDUsuarios.CadastrarUsuario(new Usuarios(doc, txtNome.Text.Trim(), txtUsuario.Text.Trim(), txtSenha.Text.Trim(), cargo, frmAcesssoRestrito.docGerente, frmLogin.docLogado)))
-                    {
-                        MessageBox.Show("Usuário cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        Dispose();
-                        return;
+                        case "Gerente":
+                            frmAcesssoRestrito frmAcesssoRestrito = new frmAcesssoRestrito();
+                            frmAcesssoRestrito.ShowDialog();
+                            if (frmAcesssoRestrito.faltenticado && BDUsuarios.CadastrarUsuario(usuario))
+                            {
+                                MessageBox.Show("Usuário cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Dispose();
+                            }
+                            break;
+
+                        case "Vendedor":
+                            if (BDUsuarios.CadastrarUsuario(usuario))
+                            {
+                                MessageBox.Show("Usuário cadastrado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                Dispose();
+                            }
+                            break;
+
+                        default:
+                            MessageBox.Show("Erro ao cadastrar usuário! ", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                            
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Dados incompletos", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Dados incompletos", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             {
@@ -70,26 +77,27 @@ namespace LocadoraLaumax.InterfacesGraficas
             {
                 frmAcesssoRestrito frmAcesssoRestrito = new frmAcesssoRestrito();
                 frmAcesssoRestrito.ShowDialog();
-                if (frmAcesssoRestrito.faltenticado)
+                if (frmAcesssoRestrito.faltenticado && !new Atalho().CamposEmBranco(this))
                 {
-                    string doc = Atalho.LimpaDoc(mkbDoc.Text);
                     string cargo = rdbVendedor.Text.Trim();
                     if (rdbGerente.Checked)
                     {
                         cargo = rdbGerente.Text.Trim();
                     }
-                    if (!doc.Equals(string.Empty) && !txtNome.Text.Trim().Equals(string.Empty) && !txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenha.Text.Trim().Equals(string.Empty))
+                    Usuarios usuario = new Usuarios(Atalho.LimpaDoc(mkbDoc.Text), txtNome.Text.Trim(), txtUsuario.Text.Trim(),
+                        txtSenha.Text.Trim(), cargo, frmAcesssoRestrito.docGerente, frmLogin.docLogado);
+
+                    if (BDUsuarios.AtualizarUsuario(usuario))
                     {
-                        if (BDUsuarios.AtualizarUsuario(new Usuarios(doc, txtNome.Text.Trim(), txtUsuario.Text.Trim(), txtSenha.Text.Trim(), cargo, frmAcesssoRestrito.docGerente, frmLogin.docLogado)))
-                        {
-                            MessageBox.Show("Usuário atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            Dispose();
-                            return;
-                        }
-                        MessageBox.Show("Erro a atualizar usuário! ", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Usuário atualizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        Dispose();
+                        return;
                     }
-                    MessageBox.Show("Dados incompletos", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Erro a atualizar usuário! ", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+
                 }
+                MessageBox.Show("Dados incompletos", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             {
@@ -100,7 +108,7 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (!mkbDoc.Equals(string.Empty) && !txtNome.Text.Trim().Equals(string.Empty) && !txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenha.Text.Trim().Equals(string.Empty))
+                if (!new Atalho().CamposEmBranco(this))
                 {
                     btnCadastrar_Click(btnCadastrar, new EventArgs());
                     e.Handled = true;

@@ -133,7 +133,6 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.txtSenhaAtual.PasswordChar = '*';
             this.txtSenhaAtual.Size = new System.Drawing.Size(107, 26);
             this.txtSenhaAtual.TabIndex = 1;
-            this.txtSenhaAtual.Text = "@john16";
             this.txtSenhaAtual.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teclas_Enter);
             // 
             // txtUsuario
@@ -144,7 +143,6 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(140, 26);
             this.txtUsuario.TabIndex = 0;
-            this.txtUsuario.Text = "master";
             this.txtUsuario.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teclas_Enter);
             // 
             // txtSenhaNova
@@ -156,7 +154,6 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.txtSenhaNova.PasswordChar = '*';
             this.txtSenhaNova.Size = new System.Drawing.Size(107, 26);
             this.txtSenhaNova.TabIndex = 3;
-            this.txtSenhaNova.Text = "@john16";
             this.txtSenhaNova.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teclas_Enter);
             // 
             // txtDoc
@@ -166,7 +163,6 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.txtDoc.Name = "txtDoc";
             this.txtDoc.Size = new System.Drawing.Size(140, 26);
             this.txtDoc.TabIndex = 2;
-            this.txtDoc.Text = "01944546650";
             this.txtDoc.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teclas_Enter);
             // 
             // frmAlteraSenha

@@ -31,7 +31,7 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             try
             {
-                if (!txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenha.Text.Trim().Equals(string.Empty))
+                if (!new Atalho().CamposEmBranco(this))
                 {
                     Usuarios usuario = new Usuarios(txtUsuario.Text.Trim(), txtSenha.Text.Trim());
                     docLogado = bdUsuario.RetornaDoc(usuario);
@@ -57,19 +57,18 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (!txtSenha.Text.Equals(string.Empty) && !txtUsuario.Equals(string.Empty))
+                if (!new Atalho().CamposEmBranco(this))
                 {
                     btnEntrar_Click(btnEntrar, new EventArgs());
                     e.Handled = true;
+                    return;
                 }
-                else
+                else if (e.KeyCode == Keys.Enter)
                 {
-                    if (e.KeyCode == Keys.Enter)
-                    {
-                        txtSenha.Focus();
-                        e.Handled = true;
-                    }
+                    txtSenha.Focus();
+                    e.Handled = true;
                 }
+
             }
         }
     }

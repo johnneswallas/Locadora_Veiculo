@@ -87,7 +87,6 @@
   <ItemGroup>
     <Compile Include="BancoDados\Entidades\BDAlugar.cs" />
     <Compile Include="BancoDados\Entidades\BDClientes.cs" />
-    <Compile Include="BancoDados\Comandos.cs" />
     <Compile Include="BancoDados\Entidades\BDComandos.cs" />
     <Compile Include="BancoDados\Entidades\BDDevolucao.cs" />
     <Compile Include="BancoDados\Entidades\BDUsuarios.cs" />

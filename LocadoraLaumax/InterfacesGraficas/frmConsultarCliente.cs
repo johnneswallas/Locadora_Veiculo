@@ -20,11 +20,11 @@ namespace LocadoraLaumax.InterfacesGraficas
         }
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            //pesquisar pelo campo
-            ltvCliente.Items.Clear();
-            List<Clientes> lista = bancoDado.ConsultarCampoClientes(txtPesquisar.Text);
             try
             {
+                //pesquisar pelo campo
+                ltvCliente.Items.Clear();
+                List<Clientes> lista = bancoDado.ConsultarCampoClientes(txtPesquisar.Text);
                 ltvCliente.Items.Clear();
                 foreach (var obj in lista)
                 {

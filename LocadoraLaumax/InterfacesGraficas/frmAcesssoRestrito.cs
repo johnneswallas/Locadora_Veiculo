@@ -39,6 +39,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                     return;
                 }
                 MessageBox.Show("Erro ao tentar altenticar ", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
 
             }
             MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Information);

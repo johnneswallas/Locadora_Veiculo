@@ -47,6 +47,11 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.relatoriosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.veiculosAlocadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.excluirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.usúarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clienteToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            this.veículoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,7 +63,8 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.cadastrosMenu,
             this.consultasToolStripMenuItem,
             this.locaçãoToolStripMenuItem,
-            this.relatoriosToolStripMenuItem});
+            this.relatoriosToolStripMenuItem,
+            this.excluirToolStripMenuItem});
             this.mnsPrincipal.Location = new System.Drawing.Point(0, 0);
             this.mnsPrincipal.Name = "mnsPrincipal";
             this.mnsPrincipal.Size = new System.Drawing.Size(800, 24);
@@ -81,7 +87,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.trocarUsuárioToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.trocarUsuárioToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.trocarUsuárioToolStripMenuItem.Name = "trocarUsuárioToolStripMenuItem";
-            this.trocarUsuárioToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.trocarUsuárioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.trocarUsuárioToolStripMenuItem.Text = "Trocar Usuário";
             this.trocarUsuárioToolStripMenuItem.Click += new System.EventHandler(this.trocarUsuárioToolStripMenuItem_Click);
             // 
@@ -90,7 +96,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.alterarSenhaToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.alterarSenhaToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.alterarSenhaToolStripMenuItem.Name = "alterarSenhaToolStripMenuItem";
-            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.alterarSenhaToolStripMenuItem.Text = "Alterar Senha";
             this.alterarSenhaToolStripMenuItem.Click += new System.EventHandler(this.alterarSenhaToolStripMenuItem_Click);
             // 
@@ -99,7 +105,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.sairToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.sairToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
@@ -197,14 +203,15 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.entregaToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.entregaToolStripMenuItem.Name = "entregaToolStripMenuItem";
             this.entregaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.entregaToolStripMenuItem.Text = "Entrega";
+            this.entregaToolStripMenuItem.Text = "Devolução";
             this.entregaToolStripMenuItem.Click += new System.EventHandler(this.entregaToolStripMenuItem_Click);
             // 
             // relatoriosToolStripMenuItem
             // 
             this.relatoriosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.veiculosAlocadosToolStripMenuItem,
-            this.usuariosToolStripMenuItem});
+            this.usuariosToolStripMenuItem,
+            this.clienteToolStripMenuItem});
             this.relatoriosToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.relatoriosToolStripMenuItem.Name = "relatoriosToolStripMenuItem";
             this.relatoriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
@@ -227,6 +234,49 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
+            // 
+            // clienteToolStripMenuItem
+            // 
+            this.clienteToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+            this.clienteToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
+            this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
+            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clienteToolStripMenuItem.Text = "Cliente";
+            // 
+            // excluirToolStripMenuItem
+            // 
+            this.excluirToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.usúarioToolStripMenuItem,
+            this.clienteToolStripMenuItem2,
+            this.veículoToolStripMenuItem});
+            this.excluirToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
+            this.excluirToolStripMenuItem.Name = "excluirToolStripMenuItem";
+            this.excluirToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.excluirToolStripMenuItem.Text = "Excluir";
+            // 
+            // usúarioToolStripMenuItem
+            // 
+            this.usúarioToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+            this.usúarioToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
+            this.usúarioToolStripMenuItem.Name = "usúarioToolStripMenuItem";
+            this.usúarioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.usúarioToolStripMenuItem.Text = "Usúario";
+            // 
+            // clienteToolStripMenuItem2
+            // 
+            this.clienteToolStripMenuItem2.BackColor = System.Drawing.Color.Black;
+            this.clienteToolStripMenuItem2.ForeColor = System.Drawing.Color.Yellow;
+            this.clienteToolStripMenuItem2.Name = "clienteToolStripMenuItem2";
+            this.clienteToolStripMenuItem2.Size = new System.Drawing.Size(180, 22);
+            this.clienteToolStripMenuItem2.Text = "Cliente";
+            // 
+            // veículoToolStripMenuItem
+            // 
+            this.veículoToolStripMenuItem.BackColor = System.Drawing.Color.Black;
+            this.veículoToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
+            this.veículoToolStripMenuItem.Name = "veículoToolStripMenuItem";
+            this.veículoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.veículoToolStripMenuItem.Text = "Veículo";
             // 
             // frmPrincipal
             // 
@@ -269,5 +319,10 @@ namespace LocadoraLaumax.InterfacesGraficas
         private System.Windows.Forms.ToolStripMenuItem relatoriosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem veiculosAlocadosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem excluirToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem usúarioToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem veículoToolStripMenuItem;
     }
 }

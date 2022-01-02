@@ -15,7 +15,7 @@ namespace LocadoraLaumax.InterfacesGraficas
         BDAlugar bdAlugar = new BDAlugar();
         BDClientes bdCliente = new BDClientes();
         BDVeiculos bdVeiculos = new BDVeiculos();
-        
+
         private void btnPesquisarPlaca_Click(object sender, EventArgs e)
         {
             //pesquisa pela placa
@@ -226,71 +226,51 @@ namespace LocadoraLaumax.InterfacesGraficas
         private void btnCalcular_Click(object sender, EventArgs e)
         {
             //calcular
-            bool fsucesso = false;
             try
             {
                 DateTime dataagora = DateTime.Now;
-                string dataRet = Atalho.LimpaData(mskRetirada.Text);
-                string dataDev = Atalho.LimpaData(mskDevolucao.Text);
-                if (!dataRet.Equals(string.Empty) && !dataDev.Equals(string.Empty))
+
+                if (!Atalho.LimpaData(mskRetirada.Text).Equals(string.Empty) && !Atalho.LimpaData(mskDevolucao.Text).Equals(string.Empty))
                 {
                     DateTime dataRetirada = DateTime.Parse(mskRetirada.Text.Trim());
                     DateTime dataDevolucao = DateTime.Parse(mskDevolucao.Text.Trim());
                     //como e so pra calcular posso deixa a data de retirada maior q a data now
                     if (dataRetirada > dataDevolucao)
-                    {   
+                    {
                         MessageBox.Show("Data de DEVOLUÇÂO menor que data de ENTREGA ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    else
+
+                    if (mskDiariaAluguel.Text.Trim().Length == 0)
                     {
-                        string doc = Atalho.LimpaDoc(mskDocAluguel.Text);
-                        string diaria = Atalho.LimpaPreco(mskDiariaAluguel.Text).ToString();
-                        if (mskDiariaAluguel.Text.Trim().Length == 0)
-                        {
-                            MessageBox.Show("Campo preenchido inadequadamente ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
-                        if (!doc.Equals(string.Empty))
-                        {
-                            if (!mskDiariaAluguel.Text.Equals(string.Empty) && !(Atalho.LimpaPreco(mskDiariaAluguel.Text).ToString() == ""))
-                            {
-                                TimeSpan dias = dataDevolucao - dataRetirada;
-                                int totDias = dias.Days + 1;
-                                lblResumo.Visible = true;
-                                lblTotDiaTitulo.Visible = true;
-                                lblTotalDia.Visible = true;
-                                lblTotalTitulo.Visible = true;
-                                lblTotal.Visible = true;
-                                btnFinalizar.Visible = true;
-                                lblTotalDia.Text = totDias.ToString();
-                                lblTotal.Text = (totDias * Atalho.LimpaPreco(mskDiariaAluguel.Text)).ToString("c");
-                            }
-                            else
-                            {
-                                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("CPF incorreto", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        MessageBox.Show("Campo preenchido inadequadamente ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    if (!Atalho.LimpaDoc(mskDocAluguel.Text).Equals(string.Empty)
+                        && !mskDiariaAluguel.Text.Equals(string.Empty)
+                        && !(Atalho.LimpaPreco(mskDiariaAluguel.Text).ToString() == ""))
+                    {
+                        TimeSpan dias = dataDevolucao - dataRetirada;
+                        int totDias = dias.Days + 1;
+                        lblResumo.Visible = true;
+                        lblTotDiaTitulo.Visible = true;
+                        lblTotalDia.Visible = true;
+                        lblTotalTitulo.Visible = true;
+                        lblTotal.Visible = true;
+                        btnFinalizar.Visible = true;
+                        lblTotalDia.Text = totDias.ToString();
+                        lblTotal.Text = (totDias * Atalho.LimpaPreco(mskDiariaAluguel.Text)).ToString("c");
+                        return;
+                        /*MessageBox.Show("Atualização feita com sucesso", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        mskDocAluguel.Text = mkbDoc.Text;
+                        return;*/
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception erro)
             {
                 MessageBox.Show("Erro ao passar informações para o banco de dados " + erro);
-            }
-            if (fsucesso)
-            {
-                MessageBox.Show("Atualização feita com sucesso", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                mskDocAluguel.Text = mkbDoc.Text;
             }
         }
         private void btnSair_Click(object sender, EventArgs e)
@@ -301,52 +281,46 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             try
             {
-                DateTime dataagora = DateTime.Now;
+                DateTime dataAgora = DateTime.Now;
                 string dataRet = Atalho.LimpaData(mskRetirada.Text);
                 string dataDev = Atalho.LimpaData(mskDevolucao.Text);
                 if (!dataRet.Equals(string.Empty) && !dataDev.Equals(string.Empty))
                 {
                     DateTime dataRetirada = DateTime.Parse(mskRetirada.Text.Trim());
                     DateTime dataDevolucao = DateTime.Parse(mskDevolucao.Text.Trim());
-                    if (dataRetirada < dataagora.Date || dataRetirada > dataDevolucao)
-                    {   
+                    if (dataRetirada < dataAgora.Date || dataRetirada > dataDevolucao)
+                    {
                         MessageBox.Show("Datas incompatíveis ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    else
+
+                    string doc = Atalho.LimpaDoc(mskDocAluguel.Text);
+                    string diaria = Atalho.LimpaPreco(mskDiariaAluguel.Text).ToString();
+                    if (!doc.Equals(string.Empty))
                     {
-                        string doc = Atalho.LimpaDoc(mskDocAluguel.Text);
-                        string diaria = Atalho.LimpaPreco(mskDiariaAluguel.Text).ToString();
-                        if (!doc.Equals(string.Empty))
+                        if (!mskDiariaAluguel.Text.Equals(string.Empty) || !(diaria.Length == 0))
                         {
-                            if (!mskDiariaAluguel.Text.Equals(string.Empty) || !(diaria.Length == 0))
+                            /*Random rnd = new Random();
+                            rnd.Next(100, 99999);*/
+
+                            Alugar aluguel = new Alugar(Atalho.LimpaDataHora(dataAgora), dataRetirada, dataDevolucao, Convert.ToDouble(diaria), doc,
+                                txtPlacaAluguel.Text, frmLogin.docLogado);
+
+                            if (bdAlugar.RetiradaVeiculo(aluguel))
                             {
-                                /*Random rnd = new Random();
-                                rnd.Next(100, 99999);*/
-                                string codAlugar = Atalho.LimpaDataHora(dataagora);
-                                if (bdAlugar.RetiradaVeiculo(new Alugar(codAlugar, dataRetirada, dataDevolucao, Convert.ToDouble(diaria), doc, txtPlacaAluguel.Text, frmLogin.docLogado)))
-                                {
-                                    MessageBox.Show("Registro feito com sucesso ", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                    mskDevolucao.Clear();
-                                    btnImprimir.Visible = true;
-                                }
-                            }
-                            else
-                            {
-                                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                mskDevolucao.Clear();
+                                btnImprimir.Visible = true;
+                                MessageBox.Show("Registro feito com sucesso ", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
                                 return;
                             }
                         }
-                        else
-                        {
-                            MessageBox.Show("CPF incorreto", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
+                    MessageBox.Show("CPF incorreto", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
-                else
-                {
-                    MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception erro)
             {
@@ -376,7 +350,7 @@ namespace LocadoraLaumax.InterfacesGraficas
         private void Teclas_PesquisarCliente(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
-            { 
+            {
                 btnPesquisarCliente_Click(btnPesquisarCliente, new EventArgs());
                 e.Handled = true;
                 e.SuppressKeyPress = true;

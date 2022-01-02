@@ -45,7 +45,6 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.txtSenha = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnEcluir = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
@@ -56,7 +55,6 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.mkbDoc);
             this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.btnEcluir);
             this.groupBox1.Controls.Add(this.btnCancelar);
             this.groupBox1.Controls.Add(this.btnAtualizar);
             this.groupBox1.Controls.Add(this.btnCadastrar);
@@ -137,7 +135,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             // 
             // btnCancelar
             // 
-            this.btnCancelar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btnCancelar.ForeColor = System.Drawing.Color.Red;
             this.btnCancelar.Location = new System.Drawing.Point(323, 159);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(82, 28);
@@ -234,18 +232,6 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.flowLayoutPanel1.Size = new System.Drawing.Size(428, 212);
             this.flowLayoutPanel1.TabIndex = 2;
             // 
-            // btnEcluir
-            // 
-            this.btnEcluir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.btnEcluir.Location = new System.Drawing.Point(53, 159);
-            this.btnEcluir.Name = "btnEcluir";
-            this.btnEcluir.Size = new System.Drawing.Size(82, 28);
-            this.btnEcluir.TabIndex = 7;
-            this.btnEcluir.Text = "Excluir";
-            this.btnEcluir.UseVisualStyleBackColor = true;
-            this.btnEcluir.Visible = false;
-            this.btnEcluir.Click += new System.EventHandler(this.btnCancelar_Click);
-            // 
             // frmCadUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -285,6 +271,5 @@ namespace LocadoraLaumax.InterfacesGraficas
         private System.Windows.Forms.MaskedTextBox mkbDoc;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button btnAtualizar;
-        private System.Windows.Forms.Button btnEcluir;
     }
 }

@@ -14,10 +14,11 @@ namespace LocadoraLaumax.InterfacesGraficas
         }
         internal void btnPesquisarPlaca_Click(object sender, EventArgs e)
         {
-            //pesquisar por placa
-            List<Veiculos> lista = bancoDado.DadosPorPlaca(txtPlaca.Text.Trim());
+            
             try
             {
+                //pesquisar por placa
+                List<Veiculos> lista = bancoDado.DadosPorPlaca(txtPlaca.Text.Trim());
                 if (lista.Count != 0)
                 {
                     foreach (var obj in lista)
@@ -48,10 +49,11 @@ namespace LocadoraLaumax.InterfacesGraficas
         }
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            //pesquisar pelo campo
-            List<Veiculos> lista = bancoDado.DadosPorCampoPesquisar(txtPesquisar.Text);
+           
             try
             {
+                //pesquisar pelo campo
+                List<Veiculos> lista = bancoDado.DadosPorCampoPesquisar(txtPesquisar.Text);
                 ltvVeiculo.Items.Clear();
                 if (lista.Count != 0)
                 {

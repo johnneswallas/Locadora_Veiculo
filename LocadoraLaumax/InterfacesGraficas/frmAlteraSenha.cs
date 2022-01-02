@@ -19,28 +19,20 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             try
             {
-                if (!txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenhaAtual.Text.Trim().Equals(string.Empty)
-                    && !txtDoc.Text.Trim().Equals(string.Empty) && !txtSenhaNova.Text.Trim().Equals(string.Empty))
+                if (!new Atalho().CamposEmBranco(this))
                 {
                     if (new BDUsuarios().AlterarSenha((new Usuarios(txtDoc.Text.Trim(), txtUsuario.Text.Trim(), txtSenhaAtual.Text.Trim(), frmLogin.docLogado)), txtSenhaNova.Text.Trim()))
                     {
                         MessageBox.Show("Senha alterada com sucesso! ", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
                         frmLogin.senhaLogado = txtSenhaNova.Text.Trim();
                         Dispose();
+                        return;
                     }
-                    else
-                    {
-                        MessageBox.Show("Usuário ou senha incoreto", null, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
+                    MessageBox.Show("Usuário ou senha incoreto", null, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-                else
-                {
-                    MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
-
-
             catch (Exception erro)
             {
                 MessageBox.Show("Erro inesperado" + erro, "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -50,8 +42,7 @@ namespace LocadoraLaumax.InterfacesGraficas
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (!txtUsuario.Text.Trim().Equals(string.Empty) && !txtSenhaAtual.Text.Trim().Equals(string.Empty)
-                    && !txtDoc.Text.Trim().Equals(string.Empty) && !txtSenhaNova.Text.Trim().Equals(string.Empty))
+                if (!new Atalho().CamposEmBranco(this))
                 {
                     btnAtualizar_Click(btnAtualizar, new EventArgs());
                     e.Handled = true;

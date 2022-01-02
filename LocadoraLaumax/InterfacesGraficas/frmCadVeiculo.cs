@@ -25,107 +25,88 @@ namespace LocadoraLaumax.InterfacesGraficas
         }
         private void btnCadastrar_Click(object sender, EventArgs e)
         {
-            bool fsucesso = false;
             try
             {
-                DateTime dataagora = DateTime.Now;
-                if (cmbAnoFabricacao.Text.Equals(string.Empty))
+                DateTime dataAgora = DateTime.Now;
+                if (!new Atalho().CamposEmBranco(this))
                 {
-                    MessageBox.Show("Data de fabricação incorreta", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DateTime dataFabricacao = DateTime.Parse(cmbAnoFabricacao.Text.Trim() + "/01/01");
+                    if (dataFabricacao.Year > dataAgora.Year)
+                    {
+                        MessageBox.Show("Data de fabricação incorreta", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    string km = Atalho.LimpaKm(mkbKm.Text);
+
+                    Veiculos veiculo = new Veiculos(txtPlaca.Text.Trim().ToUpper(), txtFabricante.Text.Trim().ToUpper(),
+                        txtModelo.Text.Trim().ToUpper(), dataFabricacao, float.Parse(Atalho.LimpaPreco(txtDiaria.Text).ToString()),
+                        int.Parse(km), 'D', frmLogin.docLogado);
+
+                    if (bancoDado.CadastrarVeiculo(veiculo))
+                    {
+                        MessageBox.Show("Registro feito com sucesso!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    MessageBox.Show("ERRO ao cadastrar veículo ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                string ano = cmbAnoFabricacao.Text.Trim() + "/01/01";
-                DateTime data = DateTime.Parse(ano);
-                if (data.Year > dataagora.Year)
-                {
-                    MessageBox.Show("Data de fabricação incorreta", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                string km = Atalho.LimpaKm(mkbKm.Text);
-                if (!txtPlaca.Text.Trim().Equals(string.Empty) && !txtFabricante.Text.Trim().Equals(string.Empty) && !txtModelo.Text.Trim().Equals(string.Empty)
-                && !Atalho.LimpaPreco(txtDiaria.Text).ToString().Equals(string.Empty) && !mkbKm.Text.Trim().Equals(string.Empty))
-                {
-                    fsucesso = bancoDado.CadastrarVeiculo(new Veiculos(txtPlaca.Text.Trim().ToUpper(), txtFabricante.Text.Trim().ToUpper(), txtModelo.Text.Trim().ToUpper(), data,
-                    float.Parse(Atalho.LimpaPreco(txtDiaria.Text).ToString()), int.Parse(km), 'D', frmLogin.docLogado));
-                }
-                else
-                {
-                    MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception erro)
             {
-                MessageBox.Show("Erro a passar informações para o banco de dados " + erro, "erro ", MessageBoxButtons.OK, MessageBoxIcon.Error);                    
-            }
-            if (fsucesso)
-            {
-                MessageBox.Show("Registro feito com sucesso!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Erro a passar informações para o banco de dados " + erro, "erro ", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void btnAtualizar_Click(object sender, EventArgs e)
         {
-            bool fsucesso = false;
             try
             {
-                DateTime dataagora = DateTime.Now;
-                if (cmbAnoFabricacao.Text.Equals(string.Empty))
+                DateTime dataAgora = DateTime.Now;
+                if (!new Atalho().CamposEmBranco(this))
                 {
-                    MessageBox.Show("Data de fabricação incorreta", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DateTime dataFabricacao = DateTime.Parse(cmbAnoFabricacao.Text.Trim() + "/01/01");
+                    if (dataFabricacao.Year > dataAgora.Year)
+                    {
+                        MessageBox.Show("Data de fabricação incorreta", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                    string km = Atalho.LimpaKm(mkbKm.Text);
+
+                    Veiculos veiculo = new Veiculos(txtPlaca.Text.Trim().ToUpper(), txtFabricante.Text.Trim().ToUpper(),
+                        txtModelo.Text.Trim().ToUpper(), dataFabricacao, float.Parse(Atalho.LimpaPreco(txtDiaria.Text).ToString()),
+                        int.Parse(km), 'D', frmLogin.docLogado);
+
+                    if (bancoDado.CadastrarVeiculo(veiculo))
+                    {
+                        MessageBox.Show("Registro feito com sucesso!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                    MessageBox.Show("ERRO ao atualizar veículo ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                string ano = cmbAnoFabricacao.Text.Trim() + "/01/01";
-                DateTime data = DateTime.Parse(ano);
-                if (data.Year > dataagora.Year)
-                {
-                    MessageBox.Show("Data de fabricação incorreta", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                string km = Atalho.LimpaKm(mkbKm.Text);
-                //olho se tem campo em branco crio metado para isso 
-                if (!txtPlaca.Text.Trim().Equals(string.Empty) && !txtFabricante.Text.Trim().Equals(string.Empty) && !txtModelo.Text.Trim().Equals(string.Empty)
-                && !Atalho.LimpaPreco(txtDiaria.Text).ToString().Equals(string.Empty) && !mkbKm.Text.Trim().Equals(string.Empty))
-                {
-                    Veiculos veiculo = new Veiculos(txtPlaca.Text.Trim().ToUpper(), txtFabricante.Text.Trim().ToUpper(), txtModelo.Text.Trim().ToUpper(), data,
-                    float.Parse(Atalho.LimpaPreco(txtDiaria.Text).ToString()), int.Parse(km), 'D', frmLogin.docLogado);
-                    fsucesso = bancoDado.AtualizarVeiculo(veiculo);
-                }
-                else
-                {
-                    MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception erro)
             {
                 MessageBox.Show("Erro a passar informções para o banco de dados " + erro, "erro ", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            if (fsucesso)
-            {
-                MessageBox.Show("Atualização feita com sucesso!", "SUCESSO", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("ERRO na atualização ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         private void Teclas_Enter(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (!txtPlaca.Text.Trim().Equals(string.Empty) && !txtFabricante.Text.Trim().Equals(string.Empty) && !txtModelo.Text.Trim().Equals(string.Empty)
-               && !Atalho.LimpaPreco(txtDiaria.Text).ToString().Equals(string.Empty) && !mkbKm.Text.Trim().Equals(string.Empty))
+                if (!new Atalho().CamposEmBranco(this))
                 {
                     btnCadastrar_Click(btnCadastrar, new EventArgs());
                     e.Handled = true;
                     e.SuppressKeyPress = true;
-					txtPlaca.Focus();
+                    txtPlaca.Focus();
+                    return;
                 }
-                else
-                {
-                    //copiado
-                    this.SelectNextControl(this.ActiveControl, !e.Shift, true, true, true);
-                    e.Handled = true;
-                    e.SuppressKeyPress = true;
-                }
+                //copiado
+                this.SelectNextControl(this.ActiveControl, !e.Shift, true, true, true);
+                e.Handled = true;
+                e.SuppressKeyPress = true;
             }
         }
         private void mkbKm_MouseClick(object sender, MouseEventArgs e)

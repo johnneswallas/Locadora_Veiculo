@@ -19,134 +19,91 @@ namespace LocadoraLaumax.InterfacesGraficas
         }
         public void btnCadastrar_Click(object sender, EventArgs e)
         {
-            bool fsucesso = false;
             try
             {
-                DateTime dataagora = DateTime.Now;
-                string dataTeste = Atalho.LimpaData(mkbNascimento.Text);
-                if (!dataTeste.Equals(string.Empty))
+                DateTime dataAgora = DateTime.Now;
+
+                if (!new Atalho().CamposEmBranco(this))
                 {
                     DateTime data = DateTime.Parse(mkbNascimento.Text.Trim());
-                    if (data.Year > dataagora.Year - 18)
+
+                    if (data.Year > dataAgora.Year - 18)
                     {
-                        MessageBox.Show("Data de Nascimento incorreta", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Não podemos cadastrar menores de 18 anos ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    else
+                    //copiado
+                    string estadoCivil = grpBox.Controls.OfType<RadioButton>().SingleOrDefault(rad => rad.Checked == true).Text;
+
+                    Clientes cliente = new Clientes(Atalho.LimpaDoc(mkbDoc.Text), txtNome.Text.Trim(), mkbTel.Text.Trim(), data, estadoCivil, frmLogin.docLogado);
+
+                    if (bancoDados.CadastrarCliente(cliente))
                     {
-                        string doc = Atalho.LimpaDoc(mkbDoc.Text);
-                        if (!doc.Equals(string.Empty))
-                        {
-                            //copiado
-                            string estadoCivil = grpBox.Controls.OfType<RadioButton>().SingleOrDefault(rad => rad.Checked == true).Text;
-                            if (!doc.Equals(string.Empty) && !mkbNascimento.Text.Equals(string.Empty) && !txtNome.Text.Trim().Equals(string.Empty)
-                                && !mkbTel.Text.Trim().Equals(string.Empty))
-                            {
-                                Clientes cliente = new Clientes(doc, txtNome.Text.Trim(), mkbTel.Text.Trim(), data, estadoCivil, frmLogin.docLogado);
-                                fsucesso = bancoDados.CadastrarCliente(cliente);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("CPF incorreto", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        MessageBox.Show("Registro feito com sucesso", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             catch (Exception erro)
             {
                 MessageBox.Show("Erro ao passar informações para o banco de dados " + erro);
-            }
-            if (fsucesso)
-            {
-                MessageBox.Show("Registro feito com sucesso", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void btnAtualisar_Click(object sender, EventArgs e)
         {
-            bool fsucesso = false;
+
             try
             {
-                DateTime dataagora = DateTime.Now;
-                string dataTeste =Atalho.LimpaData(mkbNascimento.Text);
-                if (!dataTeste.Equals(string.Empty))
+                DateTime dataAgora = DateTime.Now;
+
+                if (!new Atalho().CamposEmBranco(this))
                 {
-                    DateTime data = DateTime.Parse(mkbNascimento.Text.Trim());
-                    if (data.Year > dataagora.Year - 18)
+                    DateTime dataNascimento = DateTime.Parse(mkbNascimento.Text.Trim());
+                    if (dataNascimento.Year > dataAgora.Year - 18)
                     {
-                        MessageBox.Show("Data de Nascimento incorreta", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Não podemos cadastrar menores de 18 anos ", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
-                    else
+                    //copiado
+                    string estadoCivil = grpBox.Controls.OfType<RadioButton>().SingleOrDefault(rad => rad.Checked == true).Text;
+
+                    Clientes cliente = new Clientes(Atalho.LimpaDoc(mkbDoc.Text), txtNome.Text.Trim(), mkbTel.Text.Trim(), dataNascimento, estadoCivil, frmLogin.docLogado);
+
+                    if (bancoDados.AtualizarCliente(cliente))
                     {
-                        string doc = Atalho.LimpaDoc(mkbDoc.Text);
-                        if (!doc.Equals(string.Empty))
-                        {
-                            //copiado
-                            string estadoCivil = grpBox.Controls.OfType<RadioButton>().SingleOrDefault(rad => rad.Checked == true).Text;
-                            if (!doc.Equals(string.Empty) && !mkbNascimento.Text.Equals(string.Empty) && !txtNome.Text.Trim().Equals(string.Empty)
-                                && !mkbTel.Text.Trim().Equals(string.Empty))
-                            {
-                                Clientes cliente = new Clientes(doc, txtNome.Text.Trim(), mkbTel.Text.Trim(), data, estadoCivil, frmLogin.docLogado);
-                                fsucesso = bancoDados.AtualizarCliente(cliente);
-                            }
-                            else
-                            {
-                                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("CPF incorreto", "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
+                        MessageBox.Show("Atualização feita com sucesso", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                MessageBox.Show("Dados incompletos", null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
             catch (Exception erro)
             {
                 MessageBox.Show("Erro ao passar informações para o banco de dados " + erro);
-            }
-            if (fsucesso)
-            {
-                MessageBox.Show("Atualização feita com sucesso", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void Teclas_Enter(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
-                if (!mkbDoc.Equals(string.Empty) && !mkbNascimento.Text.Equals(string.Empty) && !txtNome.Text.Trim().Equals(string.Empty)
-                    && !mkbTel.Equals(string.Empty))
+                if (!new Atalho().CamposEmBranco(this))
                 {
                     btnCadastrar_Click(btnCadastrar, new EventArgs());
                     e.Handled = true;
                     e.SuppressKeyPress = true;
-                    txtNome.Focus();
+                    return;
                 }
-                else
+                else if (e.KeyCode == Keys.Enter)
                 {
-                    if (e.KeyCode == Keys.Enter)
-                    {
-                        //copiado
-                        this.SelectNextControl(this.ActiveControl, !e.Shift, true, true, true);
-                        e.Handled = true;
-                        e.SuppressKeyPress = true;
-                    }
+                    //copiado
+                    this.SelectNextControl(this.ActiveControl, !e.Shift, true, true, true);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
                 }
+
             }
         }
         private void Start0_MouseClick(object sender, MouseEventArgs e)

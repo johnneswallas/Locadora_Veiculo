@@ -21,202 +21,176 @@ namespace LocadoraLaumax.InterfacesGraficas
                 List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados();
                 foreach (var obj in lista)
                 {
-                    string situacao;
-                    string modelo;
+                    string situacao = "INDISPONÍVEL";
+                    string modelo = obj.ModeloVeiculo.ToUpper();
+
                     if (obj.SituacaoVeiculo.ToString().ToUpper() == "D")
                     {
                         situacao = "DISPONÍVEL";
-                    }
-                    else
-                    {
-                        situacao = "INDISPONÍVEL";
                     }
                     if (obj.ModeloVeiculo.Trim().Contains(" "))
                     {
                         modelo = obj.ModeloVeiculo.Substring(0, obj.ModeloVeiculo.IndexOf(" ")).ToUpper();
                     }
-                    else
-                    {
-                        modelo = obj.ModeloVeiculo.ToUpper();
-                    }
+
                     ListViewItem itens = new ListViewItem(new[] { situacao, obj.PlacaVeiculo.ToUpper(), modelo,
-                    obj.NomeCliente.ToUpper(),obj.DocCliente, obj.Telefone,obj.DataFim.Date.ToString("dd/MM/yyyy")});
+                        obj.NomeCliente.ToUpper(),obj.DocCliente, obj.Telefone,obj.DataFim.Date.ToString("dd/MM/yyyy")});
+
                     ltvVeiculo.Items.Add(itens);
                 }
-            }
-            catch (Exception erro)
-            {
-                MessageBox.Show(" " + erro);
-            }
-            /*
-             try
-            {
+                /*
                 List<int> listaEstoque = bancoDados.TotVeiculos();
                 for (int i = 0; i < 2; i++)
                 {
                     lblDiponivel.Text = "Veiculos Disponiveis: " + listaEstoque[0];
                     lblIndisponivel.Text = "Veiculos Alocados: " + listaEstoque[1];
                 }
+                //List<int> qtnVeiculo = bancoDados.TotVeiculos();
+                //lblDiponivel.Text = "Veiculos Disponiveis: " + qtnVeiculo[0];
+                //lblIndisponivel.Text = "Veiculos Alocados: " + qtnVeiculo[1];
+                //*/
             }
-            catch (Exception erro){ }
-            //*/
+            catch (Exception erro)
+            {
+                MessageBox.Show(" " + erro);
+            }
         }
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            //pesquisar pelo campo
-            //copiado
-            string rdb = panel1.Controls.OfType<RadioButton>().SingleOrDefault(rad => rad.Checked == true).Text;
-            DateTime datanow = DateTime.Now.Date;
-            switch (rdb)
+            try
             {
-                case "Todos":
-                    ltvVeiculo.Items.Clear();
-                    try
-                    {
-                        //pesquisar todos
-                        List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados();
-                        foreach (var obj in lista)
+                //pesquisar pelo campo
+                //copiado
+                string rdb = panel1.Controls.OfType<RadioButton>().SingleOrDefault(rad => rad.Checked == true).Text;
+
+                switch (rdb)
+                {
+                    case "Todos":
+                        ltvVeiculo.Items.Clear();
+                        try
                         {
-                            string situacao;
-                            string modelo;
-                            if (obj.SituacaoVeiculo.ToString().ToUpper() == "D")
+                            //pesquisar todos
+                            List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados();
+                            foreach (var obj in lista)
                             {
-                                situacao = "DISPONÍVEL";
+                                string situacao = "INDISPONÍVEL";
+                                string modelo = obj.ModeloVeiculo.ToUpper();
+                                if (obj.SituacaoVeiculo.ToString().ToUpper() == "D")
+                                {
+                                    situacao = "DISPONÍVEL";
+                                }
+                                if (obj.ModeloVeiculo.Trim().Contains(" "))
+                                {
+                                    modelo = obj.ModeloVeiculo.Substring(0, obj.ModeloVeiculo.IndexOf(" ")).ToUpper();
+                                }
+                                ListViewItem itens = new ListViewItem(new[] { situacao, obj.PlacaVeiculo.ToUpper(), modelo,
+                                obj.NomeCliente.ToUpper(),obj.DocCliente, obj.Telefone,obj.DataFim.Date.ToString("dd/MM/yyyy")});
+
+                                ltvVeiculo.Items.Add(itens);
                             }
-                            else
-                            {
-                                situacao = "INDISPONÍVEL";
-                            }
-                            if (obj.ModeloVeiculo.Trim().Contains(" "))
-                            {
-                                modelo = obj.ModeloVeiculo.Substring(0, obj.ModeloVeiculo.IndexOf(" ")).ToUpper();
-                            }
-                            else
-                            {
-                                modelo = obj.ModeloVeiculo.ToUpper();
-                            }
-                            ListViewItem itens = new ListViewItem(new[] { situacao, obj.PlacaVeiculo.ToUpper(), modelo,
-                    obj.NomeCliente.ToUpper(),obj.DocCliente, obj.Telefone,obj.DataFim.Date.ToString("dd/MM/yyyy")});
-                            ltvVeiculo.Items.Add(itens);
                         }
-                    }
-                    catch (Exception erro)
-                    {
-                        MessageBox.Show(" " + erro);
-                    }
-                    break;
-                case "Somente Alocados":
-                    ltvVeiculo.Items.Clear();
-                    try
-                    {
-                        //pesquisar todos
-                        List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados("I");
-                        foreach (var obj in lista)
+                        catch (Exception erro)
                         {
-                            string situacao;
-                            string modelo;
-                            if (obj.SituacaoVeiculo.ToString().ToUpper() == "D")
-                            {
-                                situacao = "DISPONÍVEL";
-                            }
-                            else
-                            {
-                                situacao = "INDISPONÍVEL";
-                            }
-                            if (obj.ModeloVeiculo.Trim().Contains(" "))
-                            {
-                                modelo = obj.ModeloVeiculo.Substring(0, obj.ModeloVeiculo.IndexOf(" ")).ToUpper();
-                            }
-                            else
-                            {
-                                modelo = obj.ModeloVeiculo.ToUpper();
-                            }
-                            ListViewItem itens = new ListViewItem(new[] { situacao, obj.PlacaVeiculo.ToUpper(), modelo,
-                    obj.NomeCliente.ToUpper(),obj.DocCliente, obj.Telefone,obj.DataFim.Date.ToString("dd/MM/yyyy")});
-                            ltvVeiculo.Items.Add(itens);
+                            MessageBox.Show(" " + erro);
                         }
-                    }
-                    catch (Exception erro)
-                    {
-                        MessageBox.Show(" " + erro);
-                    }
-                    break;
-                case "Somente Já Entregues":
-                    ltvVeiculo.Items.Clear();
-                    try
-                    {
-                        //pesquisar todos
-                        List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados("D");
-                        foreach (var obj in lista)
+                        break;
+                    case "Somente Alocados":
+                        ltvVeiculo.Items.Clear();
+                        try
                         {
-                            string situacao;
-                            string modelo;
-                            if (obj.SituacaoVeiculo.ToString().ToUpper() == "D")
+                            //pesquisar somente os alocados
+                            List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados("I");
+                            foreach (var obj in lista)
                             {
-                                situacao = "DISPONÍVEL";
+                                string situacao = "INDISPONÍVEL";
+                                string modelo = obj.ModeloVeiculo.ToUpper();
+                                if (obj.SituacaoVeiculo.ToString().ToUpper() == "D")
+                                {
+                                    situacao = "DISPONÍVEL";
+                                }
+                                if (obj.ModeloVeiculo.Trim().Contains(" "))
+                                {
+                                    modelo = obj.ModeloVeiculo.Substring(0, obj.ModeloVeiculo.IndexOf(" ")).ToUpper();
+                                }
+                                ListViewItem itens = new ListViewItem(new[] { situacao, obj.PlacaVeiculo.ToUpper(), modelo,
+                                obj.NomeCliente.ToUpper(),obj.DocCliente, obj.Telefone,obj.DataFim.Date.ToString("dd/MM/yyyy")});
+
+                                ltvVeiculo.Items.Add(itens);
                             }
-                            else
-                            {
-                                situacao = "INDISPONÍVEL";
-                            }
-                            if (obj.ModeloVeiculo.Trim().Contains(" "))
-                            {
-                                modelo = obj.ModeloVeiculo.Substring(0, obj.ModeloVeiculo.IndexOf(" ")).ToUpper();
-                            }
-                            else
-                            {
-                                modelo = obj.ModeloVeiculo.ToUpper();
-                            }
-                            ListViewItem itens = new ListViewItem(new[] { situacao, obj.PlacaVeiculo.ToUpper(), modelo,
-                    obj.NomeCliente.ToUpper(),obj.DocCliente, obj.Telefone,obj.DataFim.Date.ToString("dd/MM/yyyy")});
-                            ltvVeiculo.Items.Add(itens);
                         }
-                    }
-                    catch (Exception erro)
-                    {
-                        MessageBox.Show(" " + erro);
-                    }
-                    break;
-                case "Data de Entrega Vencida":
-                    ltvVeiculo.Items.Clear();
-                    try
-                    {
-                        //pesquisar todos
-                        List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados(DateTime.Now.Date);
-                        foreach (var obj in lista)
+                        catch (Exception erro)
                         {
-                            string situacao;
-                            string modelo;
-                            if (obj.SituacaoVeiculo.ToString().ToUpper() == "D")
-                            {
-                                situacao = "DISPONÍVEL";
-                            }
-                            else
-                            {
-                                situacao = "INDISPONÍVEL";
-                            }
-                            if (obj.ModeloVeiculo.Trim().Contains(" "))
-                            {
-                                modelo = obj.ModeloVeiculo.Substring(0, obj.ModeloVeiculo.IndexOf(" ")).ToUpper();
-                            }
-                            else
-                            {
-                                modelo = obj.ModeloVeiculo.ToUpper();
-                            }
-                            ListViewItem itens = new ListViewItem(new[] { situacao, obj.PlacaVeiculo.ToUpper(), modelo,
-                    obj.NomeCliente.ToUpper(),obj.DocCliente, obj.Telefone,obj.DataFim.Date.ToString("dd/MM/yyyy")});
-                            ltvVeiculo.Items.Add(itens);
+                            MessageBox.Show(" " + erro);
                         }
-                    }
-                    catch (Exception erro)
-                    {
-                        MessageBox.Show(" " + erro);
-                    }
-                    break;
+                        break;
+                    case "Somente Já Entregues":
+                        ltvVeiculo.Items.Clear();
+                        try
+                        {
+                            //pesquisar veiculos ja entregues
+                            List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados("D");
+                            foreach (var obj in lista)
+                            {
+                                string situacao = "INDISPONÍVEL";
+                                string modelo = obj.ModeloVeiculo.ToUpper();
+                                if (obj.SituacaoVeiculo.ToString().ToUpper() == "D")
+                                {
+                                    situacao = "DISPONÍVEL";
+                                }
+                                if (obj.ModeloVeiculo.Trim().Contains(" "))
+                                {
+                                    modelo = obj.ModeloVeiculo.Substring(0, obj.ModeloVeiculo.IndexOf(" ")).ToUpper();
+                                }
+                                ListViewItem itens = new ListViewItem(new[] { situacao, obj.PlacaVeiculo.ToUpper(), modelo,
+                                obj.NomeCliente.ToUpper(),obj.DocCliente, obj.Telefone,obj.DataFim.Date.ToString("dd/MM/yyyy")});
+
+                                ltvVeiculo.Items.Add(itens);
+                            }
+                        }
+                        catch (Exception erro)
+                        {
+                            MessageBox.Show(" " + erro);
+                        }
+                        break;
+                    case "Data de Entrega Vencida":
+                        ltvVeiculo.Items.Clear();
+                        try
+                        {
+                            //pesquisar data de entrega vencida
+                            List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados(DateTime.Now.Date);
+                            foreach (var obj in lista)
+                            {
+                                string situacao = "INDISPONÍVEL";
+                                string modelo = obj.ModeloVeiculo.ToUpper();
+                                if (obj.SituacaoVeiculo.ToString().ToUpper() == "D")
+                                {
+                                    situacao = "DISPONÍVEL";
+                                }
+                                if (obj.ModeloVeiculo.Trim().Contains(" "))
+                                {
+                                    modelo = obj.ModeloVeiculo.Substring(0, obj.ModeloVeiculo.IndexOf(" ")).ToUpper();
+                                }
+                                ListViewItem itens = new ListViewItem(new[] { situacao, obj.PlacaVeiculo.ToUpper(), modelo,
+                                obj.NomeCliente.ToUpper(),obj.DocCliente, obj.Telefone,obj.DataFim.Date.ToString("dd/MM/yyyy")});
+
+                                ltvVeiculo.Items.Add(itens);
+                            }
+                        }
+                        catch (Exception erro)
+                        {
+                            MessageBox.Show(" " + erro);
+                        }
+                        break;
+                    default:
+                        MessageBox.Show("Erro ineperado" , "ERRO", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                }
+
             }
-            //List<int> qtnVeiculo = bancoDados.TotVeiculos();
-            //lblDiponivel.Text = "Veiculos Disponiveis: " + qtnVeiculo[0];
-            //lblIndisponivel.Text = "Veiculos Alocados: " + qtnVeiculo[1];
+            catch (Exception erro)
+            {
+                MessageBox.Show(" " + erro);
+            }
         }
     }
 }
