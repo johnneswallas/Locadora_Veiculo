@@ -102,14 +102,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LocadoraLaumax.exe" size="145344">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="LocadoraLaumax.exe" size="147904">
       <assemblyIdentity name="LocadoraLaumax" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>HXO+i53RjcxTsHeFbEzsbkhgE6yHw8q5kqBvSl0WxRs=</dsig:DigestValue>
+        <dsig:DigestValue>yMKVfHDobsN/wArpM6Aufl4xTI3i42oe/nhWIhJ+BW8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

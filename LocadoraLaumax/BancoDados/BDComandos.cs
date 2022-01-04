@@ -48,6 +48,19 @@ namespace BancoDados
                 MessageBox.Show("Erro no fechamento do banco de dados" + e);
             }
         }
+        public bool TesteConexao(string stringConexao)
+        {
+            try
+            {
+                MySqlConnection testeConexao = new MySqlConnection(stringConexao);
+                testeConexao.Open();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         protected bool Inserir<T>(string tabela, ref T valores)
         {
             try

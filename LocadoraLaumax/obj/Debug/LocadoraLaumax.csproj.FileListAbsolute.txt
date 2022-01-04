@@ -41,3 +41,4 @@ C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\Locador
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmRelatorioCliente.resources
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmRelatorioVeiculoAlocados.resources
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmRelatorioVeiculos.resources
+C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmServidor.resources

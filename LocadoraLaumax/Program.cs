@@ -43,26 +43,7 @@ namespace LocadoraLaumax
                 }
                 else
                 {
-                    Console.Write("Informe ip do servidor: ");
-                    string ip = Console.ReadLine();
-                    Console.Write("Informe o servidor: ");
-                    string dataBase = Console.ReadLine();
-                    Console.Write("Informe Usuário: ");
-                    string uid = Console.ReadLine();
-                    Console.Write("Informe a senha: ");
-                    string pwd = Console.ReadLine();
-                    Console.BackgroundColor = ConsoleColor.Green;
-                    Console.ForegroundColor = ConsoleColor.Black;
-                    Console.WriteLine("Pressione ENTER para iniciar: ");
-                    Console.Read();
-                    FileInfo arquivo = new FileInfo(path);
-                    arquivo.CreateText().Close();
-                    arquivo.Attributes = FileAttributes.Hidden;
-                    using (StreamWriter sw = File.AppendText(path))
-                    {
-                        sw.WriteLine($"{ip},{dataBase},{uid},{pwd}");
-                        BDComandos.stringConexao = $"Server = {ip}; Database = {dataBase}; Uid = {uid}; Pwd = {pwd};";
-                    }
+                    Application.Run(new frmServidor());
                 }
             }
             catch (Exception erro)
