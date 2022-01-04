@@ -131,20 +131,41 @@ namespace LocadoraLaumax.InterfacesGraficas
 
         private void veiculosAlocadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmVeiculoAlocados frmVeiculoAlocados = new frmVeiculoAlocados();
+
+            frmRelatorioVeiculoAlocados frmVeiculoAlocados = new frmRelatorioVeiculoAlocados();
             frmVeiculoAlocados.MdiParent = this;
             frmVeiculoAlocados.Show();
+
         }
 
         private void usuariosToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmAcesssoRestrito frmAcesssoRestrito = new frmAcesssoRestrito();
             frmAcesssoRestrito.ShowDialog();
-            if (frmAcesssoRestrito.faltenticado)
-            {
-                frmRelatorioUsuario frmRelatorioUsuario = new frmRelatorioUsuario();
-                frmRelatorioUsuario.ShowDialog();
-            }
+
+            frmRelatorioUsuario frmRelatorioUsuario = new frmRelatorioUsuario();
+            frmRelatorioUsuario.ShowDialog();
+
+        }
+
+        private void clienteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAcesssoRestrito frmAcesssoRestrito = new frmAcesssoRestrito();
+            frmAcesssoRestrito.ShowDialog();
+
+            frmRelatorioCliente frmRelatorioCliente = new frmRelatorioCliente();
+            frmRelatorioCliente.ShowDialog();
+
+        }
+
+        private void veículosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAcesssoRestrito frmAcesssoRestrito = new frmAcesssoRestrito();
+            frmAcesssoRestrito.ShowDialog();
+
+            frmRelatorioVeiculos frmRelatorioVeiculos = new frmRelatorioVeiculos();
+            frmRelatorioVeiculos.ShowDialog();
+
         }
     }
 }

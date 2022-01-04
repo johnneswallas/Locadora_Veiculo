@@ -167,7 +167,6 @@ namespace BancoDados
             }
             return string.Empty;
         }
-
         public List<Usuarios> ConsultaUsuarios()
         {
             List<Usuarios> lista = new List<Usuarios>();
@@ -194,6 +193,22 @@ namespace BancoDados
                 Desconectar();
             }
             return lista;
+        }
+        
+        public bool ExcluirUsuario(string primaryKey)
+        {
+            try
+            {
+                if (Excluir(TabelaUsuario,"doc",primaryKey))
+                {
+                    return true;
+                }
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show(""+erro);
+            }
+            return false;
         }
     }
 }

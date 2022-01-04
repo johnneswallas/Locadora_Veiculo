@@ -6,9 +6,9 @@ using Entidades;
 using BancoDados;
 namespace LocadoraLaumax.InterfacesGraficas
 {
-    public partial class frmVeiculoAlocados : Form
+    public partial class frmRelatorioVeiculoAlocados : Form
     {
-        public frmVeiculoAlocados()
+        public frmRelatorioVeiculoAlocados()
         {
             InitializeComponent();
         }
@@ -18,7 +18,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             try
             {
                 //pesquisar todos
-                List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados();
+                List<Alugados> lista = bancoDados.ConsultaVeiculosAlocados();
                 foreach (var obj in lista)
                 {
                     string situacao = "INDISPONÍVEL";
@@ -70,7 +70,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                         try
                         {
                             //pesquisar todos
-                            List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados();
+                            List<Alugados> lista = bancoDados.ConsultaVeiculosAlocados();
                             foreach (var obj in lista)
                             {
                                 string situacao = "INDISPONÍVEL";
@@ -99,7 +99,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                         try
                         {
                             //pesquisar somente os alocados
-                            List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados("I");
+                            List<Alugados> lista = bancoDados.ConsultaVeiculosAlocados("I");
                             foreach (var obj in lista)
                             {
                                 string situacao = "INDISPONÍVEL";
@@ -128,7 +128,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                         try
                         {
                             //pesquisar veiculos ja entregues
-                            List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados("D");
+                            List<Alugados> lista = bancoDados.ConsultaVeiculosAlocados("D");
                             foreach (var obj in lista)
                             {
                                 string situacao = "INDISPONÍVEL";
@@ -157,7 +157,7 @@ namespace LocadoraLaumax.InterfacesGraficas
                         try
                         {
                             //pesquisar data de entrega vencida
-                            List<ListaVeiculos> lista = bancoDados.ConsultaVeiculosAlocados(DateTime.Now.Date);
+                            List<Alugados> lista = bancoDados.ConsultaVeiculosAlocados(DateTime.Now.Date);
                             foreach (var obj in lista)
                             {
                                 string situacao = "INDISPONÍVEL";

@@ -89,14 +89,13 @@ namespace BancoDados
             }
             return false;
         }
-        protected bool Excluir(string tabela, string primaryKey)
+        protected bool Excluir(string tabela, string nomeKey, string primaryKey)
         {
             try
             {
                 Conectar();
-                MySqlCommand command = new MySqlCommand("delete @tabela where = @primaryKey", Conexao);
+                MySqlCommand command = new MySqlCommand("delete from "+tabela+" where " + nomeKey + " = @primaryKey;", Conexao);
                 command.Parameters.Clear();
-                command.Parameters.AddWithValue("@tabela", tabela);
                 command.Parameters.AddWithValue("@primaryKey", primaryKey);
                 command.ExecuteNonQuery();
                 return true;
@@ -146,7 +145,7 @@ namespace BancoDados
                     + coluna + "= @dadoComparar and placa = @primaryKey;", Conexao);
                 command.Parameters.Clear();
                 command.Parameters.Add("@dadoComparar", MySqlDbType.VarChar).Value = dadoComparar;
-                command.Parameters.Add("@@primaryKey", MySqlDbType.VarChar).Value = @primaryKey; 
+                command.Parameters.Add("@@primaryKey", MySqlDbType.VarChar).Value = @primaryKey;
                 MySqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {

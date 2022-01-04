@@ -30,7 +30,6 @@ C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\Locador
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmLocacao.resources
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.csproj.AssemblyReference.cache
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmDevolucao.resources
-C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmVeiculoAlocados.resources
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmRelatorioUsuario.resources
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\bin\Debug\LocadoraLaumax.exe.config
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\bin\Debug\LocadoraLaumax.exe.manifest
@@ -39,3 +38,6 @@ C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\bin\Debug\Locador
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.exe.manifest
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.application
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.exe
+C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmRelatorioCliente.resources
+C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmRelatorioVeiculoAlocados.resources
+C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmRelatorioVeiculos.resources

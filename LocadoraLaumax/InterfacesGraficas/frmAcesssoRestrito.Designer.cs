@@ -73,6 +73,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(214, 30);
             this.txtSenha.TabIndex = 2;
+            this.txtSenha.Text = "@john16";
             this.txtSenha.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teclas_Enter);
             // 
             // btnSair
@@ -118,6 +119,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(214, 30);
             this.txtUsuario.TabIndex = 1;
+            this.txtUsuario.Text = "master";
             this.txtUsuario.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teclas_Enter);
             // 
             // frmAcesssoRestrito

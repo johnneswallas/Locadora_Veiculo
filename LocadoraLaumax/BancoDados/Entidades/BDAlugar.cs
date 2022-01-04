@@ -61,9 +61,9 @@ namespace BancoDados
             return false;
         }
 
-        public List<ListaVeiculos> ConsultaVeiculosAlocados()
+        public List<Alugados> ConsultaVeiculosAlocados()
         {
-            List<ListaVeiculos> lista = new List<ListaVeiculos>();
+            List<Alugados> lista = new List<Alugados>();
             try
             {
                 Conectar();
@@ -76,7 +76,7 @@ namespace BancoDados
                 {
                     while (reader.Read())
                     {
-                        lista.Add(new ListaVeiculos(reader["situacao"].ToString(), reader["fkCarro_placa"].ToString(), reader["modelo"].ToString(),
+                        lista.Add(new Alugados(reader["situacao"].ToString(), reader["fkCarro_placa"].ToString(), reader["modelo"].ToString(),
                             Convert.ToDateTime(reader["dataFim"].ToString()), reader["nome"].ToString(), reader["fkCliente_doc"].ToString(), reader["telefone"].ToString()));
                     }
                 }
@@ -91,9 +91,9 @@ namespace BancoDados
             }
             return lista;
         }
-        public List<ListaVeiculos> ConsultaVeiculosAlocados(string situacao)
+        public List<Alugados> ConsultaVeiculosAlocados(string situacao)
         {
-            List<ListaVeiculos> lista = new List<ListaVeiculos>();
+            List<Alugados> lista = new List<Alugados>();
             try
             {
                 Conectar();
@@ -106,7 +106,7 @@ namespace BancoDados
                 {
                     while (reader.Read())
                     {
-                        lista.Add(new ListaVeiculos(reader["situacao"].ToString(), reader["fkCarro_placa"].ToString(), reader["modelo"].ToString(),
+                        lista.Add(new Alugados(reader["situacao"].ToString(), reader["fkCarro_placa"].ToString(), reader["modelo"].ToString(),
                             Convert.ToDateTime(reader["dataFim"].ToString()), reader["nome"].ToString(), reader["fkCliente_doc"].ToString(), reader["telefone"].ToString()));
                     }
                 }
@@ -121,9 +121,9 @@ namespace BancoDados
             }
             return lista;
         }
-        public List<ListaVeiculos> ConsultaVeiculosAlocados(DateTime data)
+        public List<Alugados> ConsultaVeiculosAlocados(DateTime data)
         {
-            List<ListaVeiculos> lista = new List<ListaVeiculos>();
+            List<Alugados> lista = new List<Alugados>();
             try
             {
                 Conectar();
@@ -137,7 +137,7 @@ namespace BancoDados
                 {
                     while (reader.Read())
                     {
-                        lista.Add(new ListaVeiculos(reader["situacao"].ToString(), reader["fkCarro_placa"].ToString(), reader["modelo"].ToString(),
+                        lista.Add(new Alugados(reader["situacao"].ToString(), reader["fkCarro_placa"].ToString(), reader["modelo"].ToString(),
                             Convert.ToDateTime(reader["dataFim"].ToString()), reader["nome"].ToString(), reader["fkCliente_doc"].ToString(), reader["telefone"].ToString()));
                     }
                 }

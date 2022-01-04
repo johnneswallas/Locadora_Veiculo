@@ -1,7 +1,7 @@
 ﻿
 namespace LocadoraLaumax.InterfacesGraficas
 {
-    partial class frmVeiculoAlocados
+    partial class frmRelatorioVeiculoAlocados
     {
         /// <summary>
         /// Required designer variable.
@@ -201,7 +201,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.lblDiponivel.TabIndex = 18;
             this.lblDiponivel.Text = "Veículos Disponíveis: ";
             // 
-            // frmVeiculoAlocados
+            // frmRelatorioVeiculo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -214,7 +214,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.ForeColor = System.Drawing.Color.Yellow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "frmVeiculoAlocados";
+            this.Name = "frmRelatorioVeiculo";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Consulta de Veículo Alocados";

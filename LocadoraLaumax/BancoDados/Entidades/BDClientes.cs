@@ -54,6 +54,24 @@ namespace BancoDados
             }
             return false;
         }
+
+        public bool ExcluirCliente(string primaryKey)
+        {
+
+            try
+            {
+                if (Excluir(TabelaCliente, "doc", primaryKey))
+                {
+                    return true;
+                }
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("" + erro);
+            }
+            return false;
+        }
+
         public bool AtualizarCliente(Clientes cliente)
         {
             try
@@ -62,7 +80,7 @@ namespace BancoDados
                 {
                     Conectar();
                     MySqlCommand command = new MySqlCommand("update cliente set doc = ?, nome = ?, telefone = ?, nascimento = ?," +
-                        " estadoCivil = ?, fkUsuario_doc = ? where doc = '" + cliente.Documento + "';",Conexao);
+                        " estadoCivil = ?, fkUsuario_doc = ? where doc = '" + cliente.Documento + "';", Conexao);
                     command.Parameters.Add("@doc", MySqlDbType.VarChar).Value = cliente.Documento;
                     command.Parameters.Add("@nome", MySqlDbType.VarChar).Value = cliente.Nome;
                     command.Parameters.Add("@telefone", MySqlDbType.VarChar).Value = cliente.Telefone;
@@ -110,14 +128,14 @@ namespace BancoDados
             }
             return false;
         }
-        
+
         public List<Clientes> ConsultarCampoClientes(string pesquisar, int n)
         {
             List<Clientes> lista = new List<Clientes>();
             try
             {
                 Conectar();
-                MySqlCommand command = new MySqlCommand("select nome, telefone, doc, estadoCivil, nascimento  from cliente where doc = @doc;",Conexao);
+                MySqlCommand command = new MySqlCommand("select nome, telefone, doc, estadoCivil, nascimento  from cliente where doc = @doc;", Conexao);
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("@doc", pesquisar.Trim());
                 MySqlDataReader reader = command.ExecuteReader();
@@ -144,7 +162,7 @@ namespace BancoDados
             {
                 Conectar();
                 MySqlCommand command = new MySqlCommand("select nome, telefone from cliente where nome like @nome " +
-                    "or telefone like @telefone or doc like @doc;",Conexao);
+                    "or telefone like @telefone or doc like @doc;", Conexao);
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("@nome", "%" + pesquisa.ToUpper().Trim() + "%");
                 command.Parameters.AddWithValue("@telefone", "%" + pesquisa.ToUpper().Trim() + "%");
@@ -165,7 +183,34 @@ namespace BancoDados
             }
             return lista;
         }
-        
+        public List<Clientes> ListaCliente()
+        {
+            List<Clientes> lista = new List<Clientes>();
+            try
+            {
+                Conectar();
+                MySqlCommand command = new MySqlCommand("select * from " + TabelaCliente + ";", Conexao);
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Clientes cliente = new Clientes(reader["doc"].ToString(), reader["nome"].ToString(), reader["telefone"].ToString(),
+                            Convert.ToDateTime(reader["nascimento"]), reader["estadoCivil"].ToString());
+                        lista.Add(cliente);
+                    }
+                }
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("" + erro, null, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Desconectar();
+            }
+            return lista;
+        }
 
     }
 }

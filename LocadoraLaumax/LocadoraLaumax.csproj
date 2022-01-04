@@ -85,16 +85,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BancoDados\BDComandos.cs" />
     <Compile Include="BancoDados\Entidades\BDAlugar.cs" />
     <Compile Include="BancoDados\Entidades\BDClientes.cs" />
-    <Compile Include="BancoDados\Entidades\BDComandos.cs" />
     <Compile Include="BancoDados\Entidades\BDDevolucao.cs" />
     <Compile Include="BancoDados\Entidades\BDUsuarios.cs" />
     <Compile Include="BancoDados\Entidades\BDVeiculos.cs" />
     <Compile Include="Entidades\Alugar.cs" />
     <Compile Include="Entidades\Clientes.cs" />
     <Compile Include="Entidades\Devolucao.cs" />
-    <Compile Include="Entidades\ListaVeiculos.cs" />
+    <Compile Include="Entidades\Alugados.cs" />
     <Compile Include="Entidades\PesquisaDevolucao.cs" />
     <Compile Include="Entidades\Atalho.cs" />
     <Compile Include="Entidades\Usuarios.cs" />
@@ -171,17 +171,29 @@
     <Compile Include="InterfacesGraficas\frmAlterarUsuario.Designer.cs">
       <DependentUpon>frmAlterarUsuario.cs</DependentUpon>
     </Compile>
+    <Compile Include="InterfacesGraficas\frmRelatorioCliente.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfacesGraficas\frmRelatorioCliente.Designer.cs">
+      <DependentUpon>frmRelatorioCliente.cs</DependentUpon>
+    </Compile>
     <Compile Include="InterfacesGraficas\frmRelatorioUsuario.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InterfacesGraficas\frmRelatorioUsuario.Designer.cs">
       <DependentUpon>frmRelatorioUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfacesGraficas\frmVeiculoAlocados.cs">
+    <Compile Include="InterfacesGraficas\frmRelatorioVeiculoAlocados.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="InterfacesGraficas\frmVeiculoAlocados.Designer.cs">
-      <DependentUpon>frmVeiculoAlocados.cs</DependentUpon>
+    <Compile Include="InterfacesGraficas\frmRelatorioVeiculoAlocados.Designer.cs">
+      <DependentUpon>frmRelatorioVeiculoAlocados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InterfacesGraficas\frmRelatorioVeiculos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InterfacesGraficas\frmRelatorioVeiculos.Designer.cs">
+      <DependentUpon>frmRelatorioVeiculos.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -221,11 +233,17 @@
     <EmbeddedResource Include="InterfacesGraficas\frmAlterarUsuario.resx">
       <DependentUpon>frmAlterarUsuario.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="InterfacesGraficas\frmRelatorioCliente.resx">
+      <DependentUpon>frmRelatorioCliente.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InterfacesGraficas\frmRelatorioUsuario.resx">
       <DependentUpon>frmRelatorioUsuario.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InterfacesGraficas\frmVeiculoAlocados.resx">
-      <DependentUpon>frmVeiculoAlocados.cs</DependentUpon>
+    <EmbeddedResource Include="InterfacesGraficas\frmRelatorioVeiculoAlocados.resx">
+      <DependentUpon>frmRelatorioVeiculoAlocados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InterfacesGraficas\frmRelatorioVeiculos.resx">
+      <DependentUpon>frmRelatorioVeiculos.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

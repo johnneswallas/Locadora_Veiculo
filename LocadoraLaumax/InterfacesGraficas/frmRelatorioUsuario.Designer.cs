@@ -36,6 +36,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.clmCargo = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmFkUsuarioGerente_doc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmfkUsuario_doc = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btnExcluir = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // ltvUsuario
@@ -55,7 +56,8 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.ltvUsuario.Location = new System.Drawing.Point(12, 12);
             this.ltvUsuario.MultiSelect = false;
             this.ltvUsuario.Name = "ltvUsuario";
-            this.ltvUsuario.Size = new System.Drawing.Size(556, 469);
+            this.ltvUsuario.Size = new System.Drawing.Size(557, 469);
+            this.ltvUsuario.Sorting = System.Windows.Forms.SortOrder.Ascending;
             this.ltvUsuario.TabIndex = 9;
             this.ltvUsuario.UseCompatibleStateImageBehavior = false;
             this.ltvUsuario.View = System.Windows.Forms.View.Details;
@@ -90,18 +92,30 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.clmfkUsuario_doc.Text = "Doc.Usuário";
             this.clmfkUsuario_doc.Width = 87;
             // 
+            // btnExcluir
+            // 
+            this.btnExcluir.ForeColor = System.Drawing.Color.Red;
+            this.btnExcluir.Location = new System.Drawing.Point(487, 487);
+            this.btnExcluir.Name = "btnExcluir";
+            this.btnExcluir.Size = new System.Drawing.Size(82, 28);
+            this.btnExcluir.TabIndex = 10;
+            this.btnExcluir.Text = "Excluir";
+            this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
+            // 
             // frmRelatorioUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.ClientSize = new System.Drawing.Size(580, 492);
+            this.ClientSize = new System.Drawing.Size(580, 521);
+            this.Controls.Add(this.btnExcluir);
             this.Controls.Add(this.ltvUsuario);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmRelatorioUsuario";
             this.ShowIcon = false;
-            this.Text = "Relatorio Usuário";
+            this.Text = "Relatório Usuário";
             this.Load += new System.EventHandler(this.frmRelatorioUsuario_Load);
             this.ResumeLayout(false);
 
@@ -116,5 +130,6 @@ namespace LocadoraLaumax.InterfacesGraficas
         private System.Windows.Forms.ColumnHeader clmCargo;
         private System.Windows.Forms.ColumnHeader clmFkUsuarioGerente_doc;
         private System.Windows.Forms.ColumnHeader clmfkUsuario_doc;
+        private System.Windows.Forms.Button btnExcluir;
     }
 }

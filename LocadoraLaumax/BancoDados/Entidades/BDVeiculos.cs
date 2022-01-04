@@ -97,7 +97,21 @@ namespace BancoDados
             }
             return false;
         }
-
+        public bool ExcluirVeiculo(string primaryKey)
+        {
+            try
+            {
+                if (Excluir(TabelaVeiculo, "placa", primaryKey))
+                {
+                    return true;
+                }
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show("" + erro);
+            }
+            return false;
+        }
         public List<Veiculos> DadosPorPlaca(string placa)
         {
             List<Veiculos> lista = new List<Veiculos>();
@@ -141,7 +155,7 @@ namespace BancoDados
                 Conectar();
                 MySqlCommand command = new MySqlCommand("select placa, fabricante, modelo, ano, valorDiaria, situacao from veiculo " +
                     "where placa like @placa or fabricante like @fabricante or modelo like @modelo or ano like @ano " +
-                    "or valorDiaria like @valorDiaria or situacao like @situacao;", Conexao);                
+                    "or valorDiaria like @valorDiaria or situacao like @situacao;", Conexao);
                 command.Parameters.Clear();
                 command.Parameters.AddWithValue("@placa", "%" + pesquisa.ToUpper().Trim() + "%");
                 command.Parameters.AddWithValue("@fabricante", "%" + pesquisa.ToUpper().Trim() + "%");
@@ -174,7 +188,68 @@ namespace BancoDados
             }
             return lista;
         }
-
-
+        public List<Veiculos> ListaVeiculo()
+        {
+            List<Veiculos> lista = new List<Veiculos>();
+            try
+            {
+                Conectar();
+                MySqlCommand command = new MySqlCommand("select * from " + TabelaVeiculo + ";", Conexao);
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Veiculos veiculo = new Veiculos(reader["placa"].ToString(), reader["fabricante"].ToString(), 
+                            reader["modelo"].ToString(), Convert.ToDateTime(reader["ano"].ToString()), 
+                            float.Parse(reader["valorDiaria"].ToString()), int.Parse(reader["km"].ToString()), 
+                            char.Parse(reader["situacao"].ToString()), reader["fkUsuario_Doc"].ToString());
+                        lista.Add(veiculo);
+                    }
+                }
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show(" " + erro, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Desconectar();
+            }
+            return lista;
+        }
+        public List<Veiculos> ListaVeiculoPorSituacao(string situacao)
+        {
+            List<Veiculos> lista = new List<Veiculos>();
+            try
+            {
+                Conectar();
+                MySqlCommand command = new MySqlCommand("select * from " + TabelaVeiculo + " where situacao = @condicao;", Conexao);
+                command.Parameters.Clear();
+                command.Parameters.AddWithValue("@condicao", situacao);
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    while (reader.Read())
+                    {
+                        Veiculos veiculo = new Veiculos(reader["placa"].ToString(), reader["fabricante"].ToString(),
+                            reader["modelo"].ToString(), Convert.ToDateTime(reader["ano"].ToString()),
+                            float.Parse(reader["valorDiaria"].ToString()), int.Parse(reader["km"].ToString()),
+                            char.Parse(reader["situacao"].ToString()), reader["fkUsuario_Doc"].ToString());
+                        lista.Add(veiculo);
+                    }
+                }
+            }
+            catch (Exception erro)
+            {
+                MessageBox.Show(" " + erro, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                Desconectar();
+            }
+            return lista;
+        }
+       
     }
 }
