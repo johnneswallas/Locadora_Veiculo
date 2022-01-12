@@ -117,18 +117,6 @@
     <Compile Include="InterfacesGraficas\frmCadUsuario.Designer.cs">
       <DependentUpon>frmCadUsuario.cs</DependentUpon>
     </Compile>
-    <Compile Include="InterfacesGraficas\frmConsultarCliente.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InterfacesGraficas\frmConsultarCliente.Designer.cs">
-      <DependentUpon>frmConsultarCliente.cs</DependentUpon>
-    </Compile>
-    <Compile Include="InterfacesGraficas\frmConsultaVeiculo.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="InterfacesGraficas\frmConsultaVeiculo.Designer.cs">
-      <DependentUpon>frmConsultaVeiculo.cs</DependentUpon>
-    </Compile>
     <Compile Include="InterfacesGraficas\frmDevolucao.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,12 +199,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InterfacesGraficas\frmCadUsuario.resx">
       <DependentUpon>frmCadUsuario.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InterfacesGraficas\frmConsultarCliente.resx">
-      <DependentUpon>frmConsultarCliente.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="InterfacesGraficas\frmConsultaVeiculo.resx">
-      <DependentUpon>frmConsultaVeiculo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InterfacesGraficas\frmDevolucao.resx">
       <DependentUpon>frmDevolucao.cs</DependentUpon>

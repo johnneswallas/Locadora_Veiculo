@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Entidades;
 
 namespace LocadoraLaumax.InterfacesGraficas
 {
@@ -22,7 +23,11 @@ namespace LocadoraLaumax.InterfacesGraficas
         private void btnEntrar_Click(object sender, EventArgs e)
         {
             string path = @"C:\Program Files\locadora LauMax\log.csv";
-
+            if (new Atalho().CamposEmBranco(this))
+            {
+                MessageBox.Show("campo em branco!", null, MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             string ip = txtIp.Text.Trim();
             string dataBase = txtDataBase.Text.Trim();
             string uid = txtUsuario.Text.Trim();
@@ -46,9 +51,27 @@ namespace LocadoraLaumax.InterfacesGraficas
             }
             MessageBox.Show("Erro ao conectar com servidor!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
             Application.Exit();
-
         }
+        private void Teclas_Enter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                if (e.KeyCode == Keys.Enter)
+                {
+                    if (!new Atalho().CamposEmBranco(this))
+                    {
+                        btnEntrar_Click(btnEntrar, new EventArgs());
+                        e.Handled = true;
+                        e.SuppressKeyPress = true;
+                        return;
+                    }
+                    //copiado
+                    this.SelectNextControl(this.ActiveControl, !e.Shift, true, true, true);
+                    e.Handled = true;
+                    e.SuppressKeyPress = true;
+                }
 
-        
+            }
+        }
     }
 }

@@ -70,7 +70,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.txtDataBase.Name = "txtDataBase";
             this.txtDataBase.Size = new System.Drawing.Size(164, 24);
             this.txtDataBase.TabIndex = 1;
-            this.txtDataBase.Text = "locadoralaumax";
+            this.txtDataBase.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teclas_Enter);
             // 
             // label3
             // 
@@ -121,7 +121,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.txtUsuario.Name = "txtUsuario";
             this.txtUsuario.Size = new System.Drawing.Size(130, 24);
             this.txtUsuario.TabIndex = 2;
-            this.txtUsuario.Text = "root";
+            this.txtUsuario.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teclas_Enter);
             // 
             // label1
             // 
@@ -142,7 +142,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(164, 24);
             this.txtSenha.TabIndex = 3;
-            this.txtSenha.Text = "1234567";
+            this.txtSenha.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teclas_Enter);
             // 
             // txtIp
             // 
@@ -152,7 +152,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.txtIp.Name = "txtIp";
             this.txtIp.Size = new System.Drawing.Size(130, 24);
             this.txtIp.TabIndex = 0;
-            this.txtIp.Text = "localhost";
+            this.txtIp.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Teclas_Enter);
             // 
             // frmServidor
             // 

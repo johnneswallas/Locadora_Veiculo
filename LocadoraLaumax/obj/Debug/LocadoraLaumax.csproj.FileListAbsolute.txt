@@ -25,8 +25,6 @@ C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\Locador
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmAlterarUsuario.resources
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmCadCliente.resources
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmAcesssoRestrito.resources
-C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmConsultaVeiculo.resources
-C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmConsultarCliente.resources
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmLocacao.resources
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.csproj.AssemblyReference.cache
 C:\Users\JohnWallas\source\repos\LocadoraLaumax\LocadoraLaumax\obj\Debug\LocadoraLaumax.InterfacesGraficas.frmDevolucao.resources

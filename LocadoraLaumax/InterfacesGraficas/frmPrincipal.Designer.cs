@@ -38,9 +38,6 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.usuarioMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.veiculoMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.clienteMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.veiculoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clienteToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.locaçãoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.retiradaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entregaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,10 +46,6 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.usuariosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.clienteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.veículosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.excluirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.usúarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clienteToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-            this.veículoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,10 +55,8 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.mnsPrincipal.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.arquivoToolStripMenuItem,
             this.cadastrosMenu,
-            this.consultasToolStripMenuItem,
             this.locaçãoToolStripMenuItem,
-            this.relatoriosToolStripMenuItem,
-            this.excluirToolStripMenuItem});
+            this.relatoriosToolStripMenuItem});
             this.mnsPrincipal.Location = new System.Drawing.Point(0, 0);
             this.mnsPrincipal.Name = "mnsPrincipal";
             this.mnsPrincipal.Size = new System.Drawing.Size(800, 24);
@@ -82,14 +73,13 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.arquivoToolStripMenuItem.Name = "arquivoToolStripMenuItem";
             this.arquivoToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.arquivoToolStripMenuItem.Text = "Arquivo";
-
             // 
             // trocarUsuárioToolStripMenuItem
             // 
             this.trocarUsuárioToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.trocarUsuárioToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.trocarUsuárioToolStripMenuItem.Name = "trocarUsuárioToolStripMenuItem";
-            this.trocarUsuárioToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.trocarUsuárioToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.trocarUsuárioToolStripMenuItem.Text = "Trocar Usuário";
             this.trocarUsuárioToolStripMenuItem.Click += new System.EventHandler(this.trocarUsuárioToolStripMenuItem_Click);
             // 
@@ -98,7 +88,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.alterarSenhaToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.alterarSenhaToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.alterarSenhaToolStripMenuItem.Name = "alterarSenhaToolStripMenuItem";
-            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alterarSenhaToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.alterarSenhaToolStripMenuItem.Text = "Alterar Senha";
             this.alterarSenhaToolStripMenuItem.Click += new System.EventHandler(this.alterarSenhaToolStripMenuItem_Click);
             // 
@@ -107,7 +97,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.sairToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.sairToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(151, 22);
             this.sairToolStripMenuItem.Text = "Sair";
             this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
@@ -149,35 +139,6 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.clienteMenu.Text = "Cliente";
             this.clienteMenu.Click += new System.EventHandler(this.clienteMenu_Click);
             // 
-            // consultasToolStripMenuItem
-            // 
-            this.consultasToolStripMenuItem.BackColor = System.Drawing.Color.Black;
-            this.consultasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.veiculoToolStripMenuItem,
-            this.clienteToolStripMenuItem1});
-            this.consultasToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
-            this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
-            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.consultasToolStripMenuItem.Text = "Consultas";
-            // 
-            // veiculoToolStripMenuItem
-            // 
-            this.veiculoToolStripMenuItem.BackColor = System.Drawing.Color.Black;
-            this.veiculoToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
-            this.veiculoToolStripMenuItem.Name = "veiculoToolStripMenuItem";
-            this.veiculoToolStripMenuItem.Size = new System.Drawing.Size(113, 22);
-            this.veiculoToolStripMenuItem.Text = "Veiculo";
-            this.veiculoToolStripMenuItem.Click += new System.EventHandler(this.veiculoToolStripMenuItem_Click);
-            // 
-            // clienteToolStripMenuItem1
-            // 
-            this.clienteToolStripMenuItem1.BackColor = System.Drawing.Color.Black;
-            this.clienteToolStripMenuItem1.ForeColor = System.Drawing.Color.Yellow;
-            this.clienteToolStripMenuItem1.Name = "clienteToolStripMenuItem1";
-            this.clienteToolStripMenuItem1.Size = new System.Drawing.Size(113, 22);
-            this.clienteToolStripMenuItem1.Text = "Cliente";
-            this.clienteToolStripMenuItem1.Click += new System.EventHandler(this.clienteToolStripMenuItem1_Click);
-            // 
             // locaçãoToolStripMenuItem
             // 
             this.locaçãoToolStripMenuItem.BackColor = System.Drawing.Color.Black;
@@ -195,7 +156,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.retiradaToolStripMenuItem.BackColor = System.Drawing.Color.Black;
             this.retiradaToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.retiradaToolStripMenuItem.Name = "retiradaToolStripMenuItem";
-            this.retiradaToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.retiradaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.retiradaToolStripMenuItem.Text = "Retirada";
             this.retiradaToolStripMenuItem.Click += new System.EventHandler(this.retiradaToolStripMenuItem_Click);
             // 
@@ -204,7 +165,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.entregaToolStripMenuItem.BackColor = System.Drawing.Color.Black;
             this.entregaToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.entregaToolStripMenuItem.Name = "entregaToolStripMenuItem";
-            this.entregaToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.entregaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.entregaToolStripMenuItem.Text = "Devolução";
             this.entregaToolStripMenuItem.Click += new System.EventHandler(this.entregaToolStripMenuItem_Click);
             // 
@@ -217,15 +178,15 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.veículosToolStripMenuItem});
             this.relatoriosToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.relatoriosToolStripMenuItem.Name = "relatoriosToolStripMenuItem";
-            this.relatoriosToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.relatoriosToolStripMenuItem.Text = "Relatorios";
+            this.relatoriosToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.relatoriosToolStripMenuItem.Text = "Consulta";
             // 
             // veiculosAlocadosToolStripMenuItem
             // 
             this.veiculosAlocadosToolStripMenuItem.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.veiculosAlocadosToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.veiculosAlocadosToolStripMenuItem.Name = "veiculosAlocadosToolStripMenuItem";
-            this.veiculosAlocadosToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.veiculosAlocadosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.veiculosAlocadosToolStripMenuItem.Text = "Veiculos Alocados";
             this.veiculosAlocadosToolStripMenuItem.Click += new System.EventHandler(this.veiculosAlocadosToolStripMenuItem_Click);
             // 
@@ -234,7 +195,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.usuariosToolStripMenuItem.BackColor = System.Drawing.Color.Black;
             this.usuariosToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.usuariosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.usuariosToolStripMenuItem.Text = "Usuarios";
             this.usuariosToolStripMenuItem.Click += new System.EventHandler(this.usuariosToolStripMenuItem_Click);
             // 
@@ -243,7 +204,7 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.clienteToolStripMenuItem.BackColor = System.Drawing.Color.Black;
             this.clienteToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.clienteToolStripMenuItem.Name = "clienteToolStripMenuItem";
-            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.clienteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clienteToolStripMenuItem.Text = "Cliente";
             this.clienteToolStripMenuItem.Click += new System.EventHandler(this.clienteToolStripMenuItem_Click);
             // 
@@ -252,44 +213,9 @@ namespace LocadoraLaumax.InterfacesGraficas
             this.veículosToolStripMenuItem.BackColor = System.Drawing.Color.Black;
             this.veículosToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
             this.veículosToolStripMenuItem.Name = "veículosToolStripMenuItem";
-            this.veículosToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.veículosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.veículosToolStripMenuItem.Text = "veículos";
             this.veículosToolStripMenuItem.Click += new System.EventHandler(this.veículosToolStripMenuItem_Click);
-            // 
-            // excluirToolStripMenuItem
-            // 
-            this.excluirToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.usúarioToolStripMenuItem,
-            this.clienteToolStripMenuItem2,
-            this.veículoToolStripMenuItem});
-            this.excluirToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
-            this.excluirToolStripMenuItem.Name = "excluirToolStripMenuItem";
-            this.excluirToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.excluirToolStripMenuItem.Text = "Excluir";
-            // 
-            // usúarioToolStripMenuItem
-            // 
-            this.usúarioToolStripMenuItem.BackColor = System.Drawing.Color.Black;
-            this.usúarioToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
-            this.usúarioToolStripMenuItem.Name = "usúarioToolStripMenuItem";
-            this.usúarioToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.usúarioToolStripMenuItem.Text = "Usúario";
-            // 
-            // clienteToolStripMenuItem2
-            // 
-            this.clienteToolStripMenuItem2.BackColor = System.Drawing.Color.Black;
-            this.clienteToolStripMenuItem2.ForeColor = System.Drawing.Color.Yellow;
-            this.clienteToolStripMenuItem2.Name = "clienteToolStripMenuItem2";
-            this.clienteToolStripMenuItem2.Size = new System.Drawing.Size(114, 22);
-            this.clienteToolStripMenuItem2.Text = "Cliente";
-            // 
-            // veículoToolStripMenuItem
-            // 
-            this.veículoToolStripMenuItem.BackColor = System.Drawing.Color.Black;
-            this.veículoToolStripMenuItem.ForeColor = System.Drawing.Color.Yellow;
-            this.veículoToolStripMenuItem.Name = "veículoToolStripMenuItem";
-            this.veículoToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
-            this.veículoToolStripMenuItem.Text = "Veículo";
             // 
             // frmPrincipal
             // 
@@ -320,9 +246,6 @@ namespace LocadoraLaumax.InterfacesGraficas
         private System.Windows.Forms.ToolStripMenuItem usuarioMenu;
         private System.Windows.Forms.ToolStripMenuItem veiculoMenu;
         private System.Windows.Forms.ToolStripMenuItem clienteMenu;
-        private System.Windows.Forms.ToolStripMenuItem consultasToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem veiculoToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem locaçãoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem trocarUsuárioToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alterarSenhaToolStripMenuItem;
@@ -333,10 +256,6 @@ namespace LocadoraLaumax.InterfacesGraficas
         private System.Windows.Forms.ToolStripMenuItem veiculosAlocadosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem usuariosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem excluirToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem usúarioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clienteToolStripMenuItem2;
-        private System.Windows.Forms.ToolStripMenuItem veículoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem veículosToolStripMenuItem;
     }
 }

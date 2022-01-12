@@ -99,20 +99,6 @@ namespace LocadoraLaumax.InterfacesGraficas
             frmCadCliente.StartPosition = FormStartPosition.CenterScreen;
             frmCadCliente.ShowDialog();
         }
-        private void veiculoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //consultar veiculo   
-            frmConsultaVeiculo frmFilho = new frmConsultaVeiculo();
-            frmFilho.MdiParent = this;
-            frmFilho.Show();
-        }
-        private void clienteToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            //consulta cliente
-            frmConsultarCliente frmFilho = new frmConsultarCliente();
-            frmFilho.MdiParent = this;
-            frmFilho.Show();
-        }
         private void retiradaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // retirar de veiculo
